@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>W3 Riddles</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Jonathan Monteiro">
+    </head>
+
+    <body>
+            <P>
+                What gets wetter as it dries? 
+                <a href="#" id="q1">Answer</a>
+            </p>
+
+            <p> What has four legs in the morning, two in the afternoon, and three at night?
+                 <a href="#" id="q2">Answer2</a>
+            </p>
+
+       <script>
+
+        ///Variables
+        var answer1='A Towel';
+        var q1=document.querySelector('#q1');
+
+        var  answer2='A Person';
+        var q2=document.querySelector('#q2');
+
+        ///Event Listeners
+
+        q1.addEventListener('click', reveal1)           
+        q2.addEventListener('click', reveal2)           
+
+        ///Functions 
+
+        function reveal1(e)
+        {
+            e.preventDefault();
+            e.target.innerHTML=answer1;
+            e.target.style.color="red";
+            e.target.parentElement.style.backgroundColor="yellow";
+        }
+        function reveal2(e)
+        {
+            e.preventDefault();
+            e.target.innerHTML=answer2;
+        }
+        </script>
+
+    </body>
+
+
+</html>
