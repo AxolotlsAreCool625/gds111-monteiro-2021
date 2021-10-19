@@ -15,6 +15,39 @@
             <p> What has four legs in the morning, two in the afternoon, and three at night?
                  <a href="#" id="q2">Answer2</a>
             </p>
+            <P>
+                What has to be broken before you can use it? 
+                <a href="#" id="q3">Answer</a>
+            </p>
+            <P>
+                What answer can you never truthfully answer yes to? 
+                <a href="#" id="q4">Answer</a>
+            </p>
+            <P>
+                What month has 28 days in it? 
+                <a href="#" id="q5">Answer</a>
+            </p>
+            <P>
+                A one-house story is completely yellow, the chairs, table, pictures, windows, and everything else is also yellow. What color are the stairs? 
+                <a href="#" id="q6">Answer</a>
+            </p>
+            <P>
+                What goes up but can't go down? 
+                <a href="#" id="q7">Answer</a>
+            </p>
+            <P>
+                A man stands outside in the rain with nothing to cover his head in the rain, and yet he does not have wet hair. Why?
+                <a href="#" id="q8">Answer</a>
+            </p>
+            <P>
+                A boat is full of people, and yet there isn't a single person on board. How? 
+                <a href="#" id="q9">Answer</a>
+            </p>
+            <P>
+                What can you give someone, and still keep? 
+                <a href="#" id="q10">Answer</a>
+            </p>
+
 
        <script>
 
@@ -25,10 +58,42 @@
         var  answer2='A Person';
         var q2=document.querySelector('#q2');
 
+        var  answer3='An Egg';
+        var q3=document.querySelector('#q3');
+
+        var  answer4='Are You Asleep Yet?';
+        var q4=document.querySelector('#q4');
+
+        var  answer5='All of Them';
+        var q5=document.querySelector('#q5');
+
+        var  answer6='There Are No Stairs, It is a One Story House';
+        var q6=document.querySelector('#q6');
+
+        var  answer7='Your Age';
+        var q7=document.querySelector('#q7');
+
+        var  answer8='He is Bald';
+        var q8=document.querySelector('#q8');
+
+        var  answer9='Everyone is Married';
+        var q9=document.querySelector('#q9');
+
+        var  answer10='Your Word';
+        var q10=document.querySelector('#q10');
+
         ///Event Listeners
 
         q1.addEventListener('click', reveal1)           
         q2.addEventListener('click', reveal2)           
+        q3.addEventListener('click', reveal3)
+        q4.addEventListener('click', reveal4)
+        q5.addEventListener('click', reveal5)
+        q6.addEventListener('click', reveal6)
+        q7.addEventListener('click', reveal7)
+        q8.addEventListener('click', reveal8)
+        q9.addEventListener('click', reveal9)
+        q10.addEventListener('click', reveal10)
 
         ///Functions 
 
@@ -36,14 +101,73 @@
         {
             e.preventDefault();
             e.target.innerHTML=answer1;
-            e.target.style.color="red";
-            e.target.parentElement.style.backgroundColor="yellow";
+            e.target.style.color="coral";
+            e.target.parentElement.style.backgroundColor="grey";
         }
         function reveal2(e)
         {
             e.preventDefault();
             e.target.innerHTML=answer2;
+            e.target.style.color="coral";
+            e.target.parentElement.style.backgroundColor="grey";
         }
+        function reveal3(e)
+        {
+            e.preventDefault();
+            e.target.innerHTML=answer3;
+            e.target.style.color="coral";
+            e.target.parentElement.style.backgroundColor="grey";
+        }
+        function reveal4(e)
+        {
+            e.preventDefault();
+            e.target.innerHTML=answer4;
+            e.target.style.color="coral";
+            e.target.parentElement.style.backgroundColor="grey";
+        }
+        function reveal5(e)
+        {
+            e.preventDefault();
+            e.target.innerHTML=answer5;
+            e.target.style.color="coral";
+            e.target.parentElement.style.backgroundColor="grey";
+        }
+        function reveal6(e)
+        {
+            e.preventDefault();
+            e.target.innerHTML=answer6;
+            e.target.style.color="coral";
+            e.target.parentElement.style.backgroundColor="grey";
+        }
+        function reveal7(e)
+        {
+            e.preventDefault();
+            e.target.innerHTML=answer7;
+            e.target.style.color="coral";
+            e.target.parentElement.style.backgroundColor="grey";
+        }
+        function reveal8(e)
+        {
+            e.preventDefault();
+            e.target.innerHTML=answer8;
+            e.target.style.color="coral";
+            e.target.parentElement.style.backgroundColor="grey";
+        }
+        function reveal9(e)
+        {
+            e.preventDefault();
+            e.target.innerHTML=answer9;
+            e.target.style.color="coral";
+            e.target.parentElement.style.backgroundColor="grey";
+        }
+        function reveal10(e)
+        {
+            e.preventDefault();
+            e.target.innerHTML=answer10;
+            e.target.style.color="coral";
+            e.target.parentElement.style.backgroundColor="grey";
+        }
+
         </script>
 
     </body>
