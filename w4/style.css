@@ -1,0 +1,73 @@
+@import url(https://fonts.google.com/specimen/Press+Start+2P);
+
+p{
+    font-family:'Press Start 2P';
+    text-decoration:underline;
+    font-weight:bold;
+    font-style:italic;
+    line-height:30px;
+    text-align:center;
+    color: indigo;
+    opacity: .5;
+
+}
+*{
+    box-sizing:border-box;
+}
+body{
+    background-color:black;
+    display:flex;
+    justify-content:center;
+}
+main{
+    width:1336px;
+    background-color:#ffffff;
+    padding:20px;
+}
+header{
+    background:rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(35,35.185.1));
+    height:105px;
+    padding:20px;
+    font-size:70px;
+}
+nav{
+    background-color:rgb(81,97,114);
+    padding:10px;
+    text-align:center;
+    /*or use display:flex; */
+}
+
+/*Main Navigation Link Styles*/
+nav a{
+    display:inline-block;
+}
+nav a:link, nav a:visited{
+    color:purple;
+}
+nav a:hover{
+    color:red;
+}
+
+section{
+    padding:20px;
+    margin: 20px 0px 20px 0px;
+    background-color:lightslategray;
+    display:flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+#bio{
+    width:866px;
+    background-color:lime;
+    padding:10px;
+}
+#hobbies{
+    width:388px;
+    background-color:lime;
+    padding:10px;
+}
+
+footer{
+    background-color:rgb(81,97,114);
+}
