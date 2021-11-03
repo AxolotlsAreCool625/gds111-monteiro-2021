@@ -38,31 +38,3 @@ function main()
     frame=window.requestAnimationFrame(main)
 }
 
-
-function main()
-{
-    ctx.clearRect(100,100,c.width,c.height)
-    x=x+spd;
-    ctx.fillStyle=color;
-    ctx.fillRect(x,y,w,h);
-
-    if(x > c.width-w)
-    {
-        spd=-spd
-        spd=spd-5
-        color='red'
-    }
-    if(x < 0)
-    {
-        spd=-spd
-        spd=spd+5
-        color='blue'
-    }
-    if(spd > 150)
-    {
-        spd=5
-    }
-
-
-    frame=window.requestAnimationFrame(main)
-}
