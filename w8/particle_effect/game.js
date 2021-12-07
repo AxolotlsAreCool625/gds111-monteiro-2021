@@ -36,7 +36,7 @@ for(var i=0; i<amount; i++)
     asteroids[i]=new GameObject();
 
     //Change the object's color
-    asteroids[i].color=`red`;
+    asteroids[i].color=`blue`;
 
     //Set the starting position of the object
     asteroids[i].x=rand(c.width+100, 2*c.width)

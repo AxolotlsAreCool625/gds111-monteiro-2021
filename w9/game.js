@@ -36,18 +36,18 @@ for(var i=0; i<amount; i++)
     asteroids[i]=new GameObject();
 
     //Change the object's color
-    asteroids[i].color=`red`;
+    asteroids[i].color=`blue`;
 
     //Set the starting position of the object
-    asteroids[i].x=rand(0, c.width)
-    asteroids[i].y=rand(0, -c.height)
+    asteroids[i].x=rand(c.width+100, 2*c.width)
+    asteroids[i].y=rand(0, c.height)
 
     //Set the velocities of the object
-    asteroids[i].vx=0
-    asteroids[i].vy=rand(1, 3)
+    asteroids[i].vx=rand(-6, -2)
+    asteroids[i].vy=0
 
     //Set the size of the object. Notice that the width is based on the speed of the asteroid and that the h is equal to the width.
-    asteroids[i].w=asteroids[i].vy * 10
+    asteroids[i].w=asteroids[i].vx * -10
     asteroids[i].h=asteroids[i].w;
 }
 
@@ -75,10 +75,23 @@ function main()
         asteroids[i].move();
 
         //check if they are off the screen then reset their position
-        if(asteroids[i].y > c.height + asteroids[i].h/2)
+        if(asteroids[i].x < 0 - asteroids[i].w/2)
         {
-            asteroids[i].x=rand(0, c.width)
-            asteroids[i].y=rand(0, -c.height)
+            asteroids[i].x=rand(c.width+100, 2*c.width)
+            asteroids[i].y=rand(0, c.height)
+            
+            if(asteroids[i].vx < -5 )
+            {
+                asteroids[i].color = 'lime';
+            }
+            else if (asteroids[i].vx < -3.5 )
+            {
+                asteroids[i].color = 'green';
+            }
+            else
+            {
+                asteroids[i].color = 'black';
+            }
         }
 
         //draw the asteroid on the canvas
