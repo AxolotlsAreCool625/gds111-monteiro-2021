@@ -1,12 +1,17 @@
 body{
     display: flex;
     justify-content:center;
+    background-image: url(images/galaxy-wallpaper-4.jpg);
+    color: mintcream;
 }
 
 canvas{
     border: 1px solid black;
+    background-color:navy;
 }
 
 #container{
-    background-color: green;
+    background-color: navy;
+    display: flex;
+    justify-content: center;
 }

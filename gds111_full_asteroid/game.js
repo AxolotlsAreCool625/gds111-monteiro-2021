@@ -58,7 +58,7 @@ gameStates[0] = function(){
     ship.vx = 4;
     ship.vy = 4;
 
-    ship.color = `cyan`
+    ship.color = `blue`
 
     //set up the ships thruster flame
     flame.angle = 180;
@@ -92,7 +92,7 @@ gameStates[0] = function(){
     //Draw the graphics
     ctx.save();
     
-    ctx.fillStyle=`black`;
+    ctx.fillStyle=`white`;
     ctx.font =`32px Arial`;
     ctx.textAlign =`center`;
 
@@ -232,7 +232,7 @@ gameStates[1] = function(){
     
    //Show the score based on 1pt/60 frames of animation
    ctx.save();
-   ctx.fillStyle = `black`;
+   ctx.fillStyle = `white`;
    ctx.alignText = `center`
    ctx.font ="16px Arial"
    ctx.fillText(`SCORE: ${Math.floor(score/60)}`, c.width/2, 25)
@@ -247,6 +247,7 @@ gameStates[2] = function()
 {
     //Notify player that they lost
     //Show the final score
+    ctx.fillStyle = `white`;
     ctx.font =`32px Arial`;
     ctx.textAlign =`center`;
     ctx.fillText(`----------You Lose!----------`, c.width/2, c.height/2-32);
@@ -280,7 +281,7 @@ function rand(_low, _high)
 
 function resetColor()
 {
-    ship.color = `cyan`
+    ship.color = `blue`
 }
 
 
