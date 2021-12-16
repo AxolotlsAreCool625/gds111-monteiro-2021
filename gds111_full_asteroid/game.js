@@ -9,14 +9,16 @@ In this assignment, you will skin the game
 
 //Store the canvas and context objects in variables
 var c=document.querySelector(`canvas`);
-var ctx=c.getContext(`2d`)
+var ctx=c.getContext(`2d`);
 
 //Makes the animation loop start
 var timer=window.requestAnimationFrame(main);
 
 //Create the ship
 var ship = new GameObject();
+ship.img = document.querySelector(`#Rocket`);
 var flame = new GameObject();
+ctx.img = document.querySelector(`#Title`);
 
 //create the score
 var score = 0;
@@ -26,7 +28,7 @@ amount = the amount of asteroids
 asteroids = an array of GameObjects
 --------------------------------------------*/
 //More asteroids means harder game
-var amount=20;
+var amount=40;
 var asteroids=[]
 
 //create the asteroids
@@ -58,15 +60,15 @@ gameStates[0] = function(){
     ship.vx = 4;
     ship.vy = 4;
 
-    ship.color = `blue`
+    ship.color = `green`;
 
     //set up the ships thruster flame
     flame.angle = 180;
     flame.w = ship.w/2;
     flame.h = ship.h/2;
-    flame.x = ship.x - ship.w/2
-    flame.y = ship.y
-    flame.color = `red`
+    flame.x = ship.x - ship.w/2 - ship.w/4;
+    flame.y = ship.y - ship.h/4;
+    flame.color = `orange`;
     
     for(var i=0; i<amount; i++)
     {
@@ -78,20 +80,21 @@ gameStates[0] = function(){
         asteroids[i].y=rand(0, c.height)
 
         //Set the velocities (speed) of the asteroid
-        asteroids[i].vx=rand(3, 1)
+        asteroids[i].vx=rand(5, 1)
         asteroids[i].vy=0
 
         //Set the size of the asteroid. 
-        asteroids[i].w=asteroids[i].vx * 10
-        asteroids[i].h=asteroids[i].w;
+        asteroids[i].w=asteroids[i].vx * 10 + 5;
+        asteroids[i].h=asteroids[i].w + 1;
     }
+
 
     //set the innitial score
     score = 0;
 
     //Draw the graphics
     ctx.save();
-    
+
     ctx.fillStyle=`white`;
     ctx.font =`32px Arial`;
     ctx.textAlign =`center`;
@@ -111,7 +114,7 @@ gameStates[0] = function(){
 
 //The Game state is the playable part of the game
 gameStates[1] = function(){
-   
+       
     //If you are not hitting a key move to the left 2px/frame
     if(w===false && a===false && s===false && d===false)
     {
@@ -181,7 +184,7 @@ gameStates[1] = function(){
        
         //delete any running timers, change color, setTimer for 1/4 second
        clearTimeout(colorTimer)
-       ship.color = `orange`
+       ship.color = `yellow`
        colorTimer = setTimeout(resetColor, 250)
    }
 
@@ -200,12 +203,12 @@ gameStates[1] = function(){
             asteroids[i].y=rand(0, c.height)
 
             //reset the velocities of the asteroid
-            asteroids[i].vx=rand(3, 1)
+            asteroids[i].vx=rand(4, 1)
             asteroids[i].vy=0
 
             //reset the size of the asteroid. 
-            asteroids[i].w=asteroids[i].vx * 10
-            asteroids[i].h=asteroids[i].w;
+            asteroids[i].w=asteroids[i].vx * 10 + 5;
+            asteroids[i].h=asteroids[i].w + 1;
         }
 
         //Check for collision with the ship
@@ -224,7 +227,8 @@ gameStates[1] = function(){
             currentState = 2
         }
         //draw the asteroid on the canvas 
-        asteroids[i].drawCircle();
+        asteroids[i].img = document.querySelector(`#Rock`);
+        asteroids[i].drawImage();
     }
 
     //Increase the score
@@ -239,7 +243,11 @@ gameStates[1] = function(){
    ctx.restore()
 
    //draw the ship
-   ship.drawTriangle();
+   ship.drawImage();
+
+   //use this to test the ship's original collision
+   //ship.drawTriangle();
+
 }
 
 //The lose state

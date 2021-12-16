@@ -15,3 +15,6 @@ canvas{
     display: flex;
     justify-content: center;
 }
+img{
+    display:none;
+}

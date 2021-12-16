@@ -69,6 +69,16 @@ class GameObject
         ctx.restore()
     }
 
+    //Draws an image
+    drawImage()
+   {
+      ctx.save();
+        ctx.translate(this.x, this.y)
+        ctx.rotate(this.angle * Math.PI/180)
+        ctx.drawImage(this.img, -this.w/2, -this.h/2, this.w, this.h)
+      ctx.restore();
+   }
+   
     //Used for collision detection
     //Calculates distance between two objects
     distanceFrom(_obj)
