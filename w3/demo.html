@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gun</title>
+</head>
+<body>
+    <div>
+        <button id="trigger">Fire</button>
+        <button id="clip">Reload</button>
+    </div>
+        
+    <div id="output">
+        
+    </div>
+    <script>
+        //Single line comment
+        /*
+            Declare variables
+            ammoG (gun)
+            ammoI (inventory)
+            trigger
+            clip
+            output
+
+            Press fire button
+                subtract one from ammoG
+                prevent negative numbers
+                display ammo count
+
+            Press Reload Button
+                subtract one from ammoI
+                add 1 to ammoG
+                display ammo counts
+        */ 
+        var maxAmmoG = 20;
+        var ammoG = maxAmmoG;
+        var ammoI = 5;
+
+        var trigger = document.querySelector('#trigger');
+        var clip = document.querySelector('#clip');
+        var output = document.querySelector('#output');
+
+        output.innerHTML = `AmmoG:${ammoG}`;
+
+        function fire()
+        {
+            if(ammoG > 0)
+            {
+            ammoG = ammoG - 1;
+            }
+            output.innerHTML = `AmmoG:${ammoG}`;
+        }
+
+        trigger.addEventListener(`click`, fire)
+    </script>
+</body>
+</html>
