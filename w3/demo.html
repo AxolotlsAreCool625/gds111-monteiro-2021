@@ -7,6 +7,7 @@
     <title>Gun</title>
 </head>
 <body>
+
     <div>
         <button id="trigger">Fire</button>
         <button id="clip">Reload</button>
@@ -15,6 +16,7 @@
     <div id="output">
         
     </div>
+
     <script>
         //Single line comment
         /*
@@ -37,24 +39,50 @@
         */ 
         var maxAmmoG = 20;
         var ammoG = maxAmmoG;
-        var ammoI = 5;
+        var ammoI = 50;
 
         var trigger = document.querySelector('#trigger');
         var clip = document.querySelector('#clip');
         var output = document.querySelector('#output');
 
-        output.innerHTML = `AmmoG:${ammoG}`;
+        update()
 
-        function fire()
+        function fire(e)
         {
             if(ammoG > 0)
             {
-            ammoG = ammoG - 1;
+            ammoG = ammoG + -1;
             }
-            output.innerHTML = `AmmoG:${ammoG}`;
+            update()
+        }
+
+        function reload(e)
+        {
+            var bulletsToLoad = maxAmmoG - ammoG;
+
+            if (ammoI > bulletsToLoad)
+            {
+                ammoG = ammoG + bulletsToLoad;
+                ammoI = ammoI + -bulletsToLoad;
+            }
+            else
+            {
+                ammoG = ammoG + ammoI;
+                ammoI = ammoI + -ammoI;
+            }
+
+
+            update()
+        }
+
+        function update()
+        {
+            output.innerHTML = `<b>AmmoG:<b>${ammoG}<br><b>AmmoI:<b>${ammoI}`;
         }
 
         trigger.addEventListener(`click`, fire)
+        clip.addEventListener(`click`, reload)
+
     </script>
 </body>
 </html>

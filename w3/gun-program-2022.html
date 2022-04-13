@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gun</title>
+</head>
+<body>
+    <div>
+        <button id="trigger">Fire</button>
+        <button id="clip">Reload</button>
+        <button id="laserGun">Laser Gun</button>
+        <button id="pistolGun">Pistol</button>
+    </div>
+
+    <div id="output">
+
+    </div>
+
+    <script>
+    
+        class Gun
+        {
+            constructor()
+            {
+                
+                this.max = 25;
+                this.ammo = this.max;
+
+            }
+        }
+
+        class Person
+        {
+            constructor()
+            {
+
+                this.rounds = 100;
+                this.gun;
+            }
+        }
+
+        var laser = new Gun();
+        laser.max = 20;
+        laser.ammo = laser.max;
+
+        var pistol = new Gun();
+        pistol.max = 6;
+        pistol.ammo = pistol.max;
+
+        var fred = new Person();
+        fred.rounds = 100;
+        fred.gun = pistol;
+
+        var trigger = document.querySelector(`#trigger`);
+        var clip = document.querySelector(`#clip`);
+        var output = document.querySelector(`#output`);
+        var laser = document.querySelector(`#laser`);
+        var pistol = document.querySelector(`#pistol`);
+        
+        update();
+
+        function fire(e)
+        {                                              
+            if(fred.gun.ammo>0)
+            {
+                fred.gun.ammo = fred.gun.ammo + -1;
+            }
+
+                update();
+        }
+
+        function reload(e)
+        {
+            if(fred.rounds > 0)
+            {
+                var bulletsToLoad = fred.gun.max-fred.gun.ammo;
+                
+                if(fred.rounds >= bulletsToLoad)
+                {
+                    fred.gun.ammo = fred.gun.ammo + bulletsToLoad;
+                    fred.rounds = fred.rounds + -bulletsToLoad;  
+                }
+                else
+                {
+                    fred.gun.ammo = fred.gun.ammo  + fred.rounds;
+                    fred.rounds = fred.rounds + -fred.rounds;
+                }
+
+               update();
+            }
+        }
+
+        function laserSwap()
+        {
+
+
+            update("laser");
+        }   
+
+        function pistolSwap()
+        {
+
+            update("pistol")
+        }
+
+
+        /*---DO THIS---------------------------
+        1.Create a function to do the following
+           a. switch fred's gun to the laser
+           b. update the screen
+        2.Create a function to do the following
+           a. switch fred's gun to the pistol
+           b. update the screen
+        -------------------------------------*/
+        function update(_Gun="")
+        {
+            output.innerHTML = `Gun:${_Gun}<b>AmmoGun:</b>${fred.gun.ammo}<br><b>AmmoGuy:</b>${fred.rounds}`;
+        }
+
+        trigger.addEventListener(`click`, fire);
+        clip.addEventListener(`click`, reload);
+
+        /*---DO THIS---------------------------
+        1.Add an event listener to the LASER button and call a function that sets fred's gun to the laser
+        2.Add an event listener to the PISTOL button and call a function that sets fred's gun to the pistol
+        -------------------------------------*/
+
+    </script>
+</body>
+</html>
