@@ -27,6 +27,7 @@
                 
                 this.max = 25;
                 this.ammo = this.max;
+                this.name;
 
             }
         }
@@ -44,26 +45,28 @@
         var laser = new Gun();
         laser.max = 20;
         laser.ammo = laser.max;
+        laser.name = "Laser Gun";
 
         var pistol = new Gun();
         pistol.max = 6;
         pistol.ammo = pistol.max;
+        pistol.name = "Pistol Gun";
 
         var fred = new Person();
         fred.rounds = 100;
-        fred.gun = pistol;
+        fred.gun = laser;
 
         var trigger = document.querySelector(`#trigger`);
         var clip = document.querySelector(`#clip`);
         var output = document.querySelector(`#output`);
-        var laser = document.querySelector(`#laser`);
-        var pistol = document.querySelector(`#pistol`);
+        var laserGun = document.querySelector(`#laserGun`);
+        var pistolGun = document.querySelector(`#pistolGun`);
         
         update();
 
         function fire(e)
         {                                              
-            if(fred.gun.ammo>0)
+            if(fred.gun.ammo > 0)
             {
                 fred.gun.ammo = fred.gun.ammo + -1;
             }
@@ -92,19 +95,20 @@
             }
         }
 
-        function laserSwap()
-        {
-
-
-            update("laser");
-        }   
-
+        //The function must replace the ammo gun value of the current gun with the one the user attempts to swap to, and still store the ammo gun value of the current gun.
         function pistolSwap()
         {
+            fred.gun = pistol;
+            fred.gun.ammo = pistol.ammo;
+            update();
+        }   
 
-            update("pistol")
+        function laserSwap()
+        {
+            fred.gun = laser;
+            fred.gun.ammo = laser.ammo;
+            update();
         }
-
 
         /*---DO THIS---------------------------
         1.Create a function to do the following
@@ -116,12 +120,13 @@
         -------------------------------------*/
         function update(_Gun="")
         {
-            output.innerHTML = `Gun:${_Gun}<b>AmmoGun:</b>${fred.gun.ammo}<br><b>AmmoGuy:</b>${fred.rounds}`;
+            output.innerHTML = `<b>Gun:</b>${fred.gun.name}<br><b>AmmoGun:</b>${fred.gun.ammo}<br><b>AmmoGuy:</b>${fred.rounds}<br><b>Capacity:</b>${fred.gun.max}`;
         }
 
         trigger.addEventListener(`click`, fire);
         clip.addEventListener(`click`, reload);
-
+        laserGun.addEventListener(`click`, laserSwap);
+        pistolGun.addEventListener(`click`, pistolSwap);
         /*---DO THIS---------------------------
         1.Add an event listener to the LASER button and call a function that sets fred's gun to the laser
         2.Add an event listener to the PISTOL button and call a function that sets fred's gun to the pistol
