@@ -95,7 +95,6 @@
             }
         }
 
-        //The function must replace the ammo gun value of the current gun with the one the user attempts to swap to, and still store the ammo gun value of the current gun.
         function pistolSwap()
         {
             fred.gun = pistol;
@@ -110,28 +109,16 @@
             update();
         }
 
-        /*---DO THIS---------------------------
-        1.Create a function to do the following
-           a. switch fred's gun to the laser
-           b. update the screen
-        2.Create a function to do the following
-           a. switch fred's gun to the pistol
-           b. update the screen
-        -------------------------------------*/
         function update(_Gun="")
         {
-            output.innerHTML = `<b>Gun:</b>${fred.gun.name}<br><b>AmmoGun:</b>${fred.gun.ammo}<br><b>AmmoGuy:</b>${fred.rounds}<br><b>Capacity:</b>${fred.gun.max}`;
+            output.innerHTML = `<b>Gun: </b>${fred.gun.name}<br><b>Ammo in gun: </b>${fred.gun.ammo}<br><b>Ammo on hand: </b>${fred.rounds}<br><b>Capacity: </b>${fred.gun.max}`;
         }
 
         trigger.addEventListener(`click`, fire);
         clip.addEventListener(`click`, reload);
         laserGun.addEventListener(`click`, laserSwap);
         pistolGun.addEventListener(`click`, pistolSwap);
-        /*---DO THIS---------------------------
-        1.Add an event listener to the LASER button and call a function that sets fred's gun to the laser
-        2.Add an event listener to the PISTOL button and call a function that sets fred's gun to the pistol
-        -------------------------------------*/
-
+       
     </script>
 </body>
 </html>
