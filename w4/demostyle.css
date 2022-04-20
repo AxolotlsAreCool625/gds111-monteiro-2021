@@ -11,13 +11,13 @@ body{
     display:flex;
     flex-direction: row;
     justify-content: center;
-    background-image: url(images/Axolotl.jpg);
+    /*background-image: url(images/Axolotl.jpg); */
 }
 
 div{
     border-width: 2px;
     border-color: black;
-    border-style: dotted;
+    border-style: dashed;
 
     padding-top: 10px;
     padding-bottom: 10px;
@@ -42,7 +42,7 @@ div{
     color: black;
 }
 #content{
-    background-color: lightcoral;
+    background-color: lightgrey;
     color: black;
     display:flex;
 }
