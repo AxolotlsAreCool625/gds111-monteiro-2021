@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap');
+
+html{
+    margin:0;
+}
+
+body{
+    margin:0;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    /*background-image: url(images/Axolotl.jpg); */
+}
+
+div{
+    border-width: 2px;
+    border-color: black;
+    border-style: dashed;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    margin: 20px;
+}
+
+#main{
+    background-color: whitesmoke;
+    color: black;
+    width: 1000px;
+}
+
+#header{
+    background-color: lightgreen;
+    color: black;
+}
+#nav{
+    background-color: lightskyblue;
+    color: black;
+}
+#content{
+    background-color: lightgrey;
+    color: black;
+    display:flex;
+}
+#footer{
+    background-color: rgb(255, 255, 109);
+    color: black;
+}
+a{
+    display:flex;
+    display:block;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: bisque;
+    padding:10px;
+    border-radius:10px;
+}
+a:link{
+    color:black;
+}
+a:visited{
+    color:white;
+}
+a:hover{
+    color:limegreen;
+}
+a:active{
+    color:red;
+}
+
+h2{
+    color:black;
+    text-decoration: underline;
+    font-size:36px;
+    font-weight:normal;
+    font-family: 'Grape Nuts', cursive;
+}
