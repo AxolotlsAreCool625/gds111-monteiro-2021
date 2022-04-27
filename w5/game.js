@@ -115,7 +115,7 @@ function game()
 //fuel should decrease
 if(car1.fuel >= 0)
     {
-        car1.fuel = car1.fuel - (Math.abs(car1.vx) + Math.abs(car1.vy));
+        car1.fuel = car1.fuel - (Math.abs(car1.vx) + Math.abs(car1.vy) + 5);
     }
 bar1.w = 400 * car1.fuel/car1.max;
     
@@ -196,9 +196,9 @@ if( car1.fuel < 0)
 
     if (car1.hit(gas))
     {
-        if (car1.fuel <= car1.max - 800)
+        if (car1.fuel <= car1.max - 1000)
         {
-        car1.fuel += 800;
+        car1.fuel += 1000;
         }
         else
         {
