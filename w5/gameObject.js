@@ -12,6 +12,7 @@ class GameObject
         this.fuel = 800;
         this.angle = 0;
         this.force = 0;
+        this.max = 3500;
     }
 
     drawRect()

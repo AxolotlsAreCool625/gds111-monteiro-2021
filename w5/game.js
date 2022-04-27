@@ -20,7 +20,7 @@ var car1 = new GameObject();
     car1.vx = 0;
     car1.vy = 0;
     car1.force = 2;
-    car1.fuel = 3500;
+    car1.fuel = 2500;
 
 var truck1 = new GameObject();
     truck1.x = c.width + 200;
@@ -33,8 +33,8 @@ var finishLine = new GameObject();
     finishLine.x = 9000;
 
 var bar1 = new GameObject();
-    bar1.y = 200;
-    bar1.w = 200;
+    bar1.y = 100;
+    bar1.w = 400;
     bar1.h = 20;
     bar1.color = `limegreen`;
 
@@ -113,11 +113,11 @@ function game()
     }
 
 //fuel should decrease
-if(car1.fuel > 0)
+if(car1.fuel >= 0)
     {
         car1.fuel = car1.fuel - (Math.abs(car1.vx) + Math.abs(car1.vy));
     }
-bar1.w = 200 * car1.fuel/1500;
+bar1.w = 400 * car1.fuel/car1.max;
     
 //move gas 
     gas.x += gas.vx;
@@ -196,7 +196,16 @@ if( car1.fuel < 0)
 
     if (car1.hit(gas))
     {
+        if (car1.fuel <= car1.max - 800)
+        {
         car1.fuel += 800;
+        }
+        else
+        {
+        car1.fuel = car1.max;
+        }
+
+
         gas.x = c.width + 200;
         gas.y = locations[Math.floor(Math.random()*2.9)];
     }
