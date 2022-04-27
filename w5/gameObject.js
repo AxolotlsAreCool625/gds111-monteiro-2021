@@ -42,4 +42,24 @@ class GameObject
 
         ctx.restore();
     }
+
+    left(){return this.x - this.w/2;}
+    right(){return this.x + this.w/2;}
+
+    top(){return this.y - this.h/2;}
+    bottom(){return this.y + this.h/2;}
+
+    hit(_obj)
+    {
+        if(
+            this.left() < _obj.right() &&
+            this.right() > _obj.left() &&
+            this.top() < _obj.bottom() &&
+            this.bottom() > _obj.top() 
+          )
+        {
+            return true;
+        }
+        return false;
+    }
 }
