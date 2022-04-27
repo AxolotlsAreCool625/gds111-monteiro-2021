@@ -20,7 +20,7 @@ var car1 = new GameObject();
     car1.vx = 0;
     car1.vy = 0;
     car1.force = 2;
-    car1.fuel = 2500;
+    car1.fuel = car1.max;
 
 var truck1 = new GameObject();
     truck1.x = c.width + 200;
