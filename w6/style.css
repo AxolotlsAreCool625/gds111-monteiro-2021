@@ -1,0 +1,77 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap');
+html{
+    margin:0;
+}
+
+body{
+    margin:0;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    background-repeat:no-repeat;
+    background-size: 100%;
+}
+#main{
+    background-color:#ffff00;
+    color:rgb(255, 137, 2);
+    width:950px;
+    padding:20px;
+}
+#header{
+    background-color:aqua;
+}
+#nav{
+    background-color:lime;
+    display:flex;
+    justify-content:center;
+    background-image:url(images/macho.webp);
+    
+}
+#content{
+    background-color:blue;
+}
+
+#footer{
+    background-color:aqua;
+}
+
+a{
+    display:block;
+    margin-left:10px;
+    margin-right:10px;
+    background-color:bisque;
+    padding:10px;
+    border-radius:10px;
+}
+a:link{
+    color:black;
+}
+a:visited{
+    color:black;
+}
+a:hover{
+    color:cornflowerblue;
+    background-color:brown;
+}
+a:active{
+    color:cornflowerblue;
+}
+
+h1{
+    color:black;
+    text-decoration:underline;
+    font-size:36px;
+    font-weight:normal;
+    font-style:italic;
+    font-family: 'Rubik Moonrocks', cursive;
+}
+
+canvas{
+    background-image:url(images/road.png);
+}
+
+.graphic {
+    display:none;
+}

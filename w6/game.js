@@ -1,96 +1,137 @@
+//sets up the canvas and timer
 var c = document.querySelector(`canvas`);
 var ctx = c.getContext(`2d`);
-
 var timer = window.requestAnimationFrame(main);
 
+//set friction for the y axis
 var fy = .85;
 var fx = .85;
 
+var amt = 7;
+
+var roadX = 0;
+
+//locations for the vet (...and maybe the powerup ;-) to go to
 var locations = [];
-locations [0] = c.height * .5 - 200;
-locations [1] = c.height * .5;
-locations [2] = c.height * .5 + 200;
-
-var amt = 8;
-var truck = [];
-for(var i=0; i<amt; i++)
-    {
-        truck[i] = new GameObject();
-    }
-    
-var car1 = new GameObject();
-    car1.x = 0 + 100;
-    car1.y = c.height * .5;
-    car1.h  = 50;
-    car1.w  = 100;
-    car1.color = `LightSalmon`;
-    car1.vx = 0;
-    car1.vy = 0;
-    car1.force = 2;
-    car1.fuel = car1.max;
-
 for(var i=0; i<amt; i++)
 {
-    truck.x = c.width + 200;
-    truck.y = locations[1];
-    truck.vx = -5;
+    locations[i] = 64 + c.height * i/8 ;
+    console.log(locations[i]*2);
 }
 
+//Creates instances of my GameObject class
+var car1 = new GameObject();
+
+
+var vet = [];
+for(var i=0; i<amt; i++)
+{
+    vet[i] = new GameObject();
+}
+
+var bar = new GameObject();
 var finishLine = new GameObject();
+var powerup = new GameObject();
+
+
+//Stores the name of the function I want to execute.
+var play = menu;
+
+//Starts the game and sets up each object's starting values
+function menu()
+{
+    ctx.save();
+        ctx.textAlign = `center`;
+        ctx.fillText(`Press Space to Start`, c.width*.5, c.height*.5)
+    ctx.restore();
+
+    roadX = 0;
+
+    //Car's innitial values
+    car1.h = 32;
+    car1.w = 64;
+    car1.color = `cyan`
+    car1.x = 100;
+    car1.img = document.querySelector(`#car`);
+    
+    //The maximum amount of fuel your car can have
+    car1.max = 1500;
+    car1.fuel = car1.max;
+    car1.force = 2;
+    car1.vx = 5;
+    
+    //Vet's innitial values
+    for(var i=0; i<amt; i++)
+    {
+        vet[i].x = rand(c.width, c.width*2);
+        vet[i].y = locations[i];
+        vet[i].vx = Math.floor(rand(-10,-3));
+        vet[i].w = 64;
+        vet[i].h = 32;   
+        vet[i].img = document.querySelector(`#car`);
+    }
+    
+    //Powerups innitial value;
+    powerup.x = c.width + powerup.w*.5;
+    powerup.y = locations[Math.floor(rand(0,locations.length-.1))];
+    powerup.vx = -10;//Math.floor(rand(-10,-3));
+    powerup.w = 20;
+    powerup.h = powerup.w;
+    powerup.color = `orange`;
+    //amount of fuel to add when collected.
+    powerup.fuel = car1.max;
+
+    //Fuel Bar's innitial values
+    bar.y = 25;
+
+    //The maximum size of the fuel bar
+    bar.max = 200;
+    bar.w = bar.max;
+    bar.h = 20;
+    bar.color = `limegreen`
+
+    //Finish line's innitial values
     finishLine.w = 20;
     finishLine.h = c.height;
     finishLine.x = 9000;
 
-var bar1 = new GameObject();
-    bar1.y = 100;
-    bar1.w = 400;
-    bar1.h = 20;
-    bar1.color = `limegreen`;
-
-var gas = new GameObject();
-    gas.color = `red`;
-    gas.x = c.width - 200;
-    gas.y = locations[Math.floor(Math.random()*2.9)];
-    gas.vx = -5;
-    gas.h = 30;
-    gas.w = 30;
-
-
-var play = menu;
-
-function menu()
-{
-    reset();
-    ctx.save();
-    ctx.textAlign = `center`;
-    ctx.fillText(`Press Space to Start`, c.width * .5, c.height * .5)
-    ctx.restore();
-
+    //If the spacebar is pressed use the game function to run the program
     if(space == true)
     {
         play = game;
     }
 }
+
+
+//Is used when you lose
 function lose()
 {
     ctx.save();
-    ctx.textAlign = `center`;
-    ctx.fillText(`You Lose`, c.width * .5, c.height * .5)
+        ctx.textAlign = `center`;
+        ctx.fillText(`You Lose!`, c.width*.5, c.height*.5)
     ctx.restore();
 
+     //If the spacebar is pressed use the menu function to run the program
+     //Makes sure that space is false as true when the menu starts
+     //If you don't do this the program will skip the menu and go straight to the game.
     if(space == true)
     {
         play = menu;
         space = false;
     }
 }
+
+//Is used when you lose
 function win()
 {
     ctx.save();
-    ctx.textAlign = `center`;
-    ctx.fillText(`You Win!`, c.width * .5, c.height * .5)
+        ctx.textAlign = `center`;
+        ctx.fillText(`You Win!`, c.width*.5, c.height*.5)
     ctx.restore();
 
+     //If the spacebar is pressed use the menu function to run the program
+     //Makes sure that space is false as true when the menu starts
+     //If you don't do this the program will skip the menu and go straight to the game.
     if(space == true)
     {
         play = menu;
@@ -98,147 +139,134 @@ function win()
     }
 }
 
+
+//This function is the actual playable part of the game.
 function game()
 {
-    //key presses and speed
-    if (w == true)
+    /*---------This section is the input------------------*/
+
+    //accellerates the car upwards by decreasing its velocity on the y axis
+    if(w == true)
     {
         car1.vy += -car1.force;
     }
 
-    if (s == true)
+    //accellerates the car downward by increasing its velocity on the y axis
+    if(s == true)
     {
         car1.vy += car1.force;
     }
+  
+    /*--------------This section is the movement-----------*/
 
-    if (a == true)
+    /*
+        1. Makes fuel work by subtracting the car's velocity from the fuel    
+        2. Makes the bar display at the correct size. 
+        3. The first number is how wide you want the bar to be.
+        4. The second number is the total amount of fuel your car can have.
+        IMPORTANT! Don't let your fuel go over car.max!
+    */
+    if(car1.fuel > 0)
     {
-        car1.vx += -car1.force;
-    }
+        car1.fuel += -car1.vx;
+    }   
+    bar.w = bar.max * car1.fuel/car1.max;
 
-    if (d == true)
-    {
-        car1.vx += car1.force;
-    }
-
-//fuel should decrease
-if(car1.fuel >= 0)
-    {
-        car1.fuel = car1.fuel - ((Math.abs(car1.vx) + Math.abs(car1.vy) + 5)/1.5);
-    }
-bar1.w = 400 * car1.fuel/car1.max;
-    
-//move gas 
-    gas.x += gas.vx;
-
-    if (gas.x < 0 - gas.w * .5)
-    {
-        gas.x = c.width + 200;
-        gas.y = locations[Math.floor(Math.random()*2.9)];
-    }
-
-//makes car drift slightly
+    //applies friction to the car
     car1.vy *= fy;
+
+    //Moves the car (and the finish line)
     car1.y += car1.vy;
-    car1.vx *= fx;
-    car1.x += car1.vx;
+    finishLine.x += -car1.vx;
+    powerup.move();
+    
+    /*---------------This section is Collision Detection-------------*/
 
-//enemy car
-    truck1.x += truck1.vx;
-
-//finish line moving to player
-    finishLine.x += -5;
-
-//running out of fuel, game over
-if( car1.fuel < 0)
-{
-    play = lose;
-}
-
-//colision with borders
-    if(car1.y < 0 + 25)
-    {
-        car1.y = 0 + 25;
-        car1.vy = -car1.vy;
-    }
-
-    if(car1.y > c.height - 40)
-    {
-        car1.y = c.height - 40;
-        car1.vy = -car1.vy;
-    }
-
-    if(car1.x < 0 + car1.w * .5)
-    {
-        car1.x = 0 + car1.w * .5;
-        car1.vx = 0;
-    }
-
-    if(car1.x > c.width - car1.w * .5 - 65)
-    {
-        car1.x = c.width - car1.w * .5 - 65;
-        car1.vx = 0;
-    }
-
-    if (truck1.x < 0 - truck1.w * .5)
-    {
-        truck1.x = c.width + 200;
-        truck1.y = locations[Math.floor(Math.random()*2.9)];
-        truck1.vx = Math.floor(Math.random()*(-3 - -10) + -10);
-        truck1.h = Math.floor(Math.random()*150 + 30);
-    }
-
-
-
-
-    //collision with objects
-
-    if (car1.hit(truck1))
+    //If your fuel becomes lower than 1 switch to the lose function.
+    if(car1.fuel <=0)
     {
         play = lose;
     }
+    
+    //if your car's x becomes lower than 100pixels from the top make it bounce
+    if(car1.y < locations[0])
+    {
+        car1.y = locations[0];
+        car1.vy = 0;//-car1.vy;
+       
+    }
 
+     //if your car's x becomes higher than 100 pixels from the bottom make it bounce
+    if(car1.y > locations[amt-1])
+    {
+        car1.y = locations[amt-1];
+        car1.vy = 0;//-car1.vy;
+    }
+
+   
+    //If the car hit's the finishLine play the WIN function
     if(car1.hit(finishLine))
     {
-        play = win;
+        play = win
     }
+    
 
-    if (car1.hit(gas))
+    if(powerup.x < 0 - powerup.w * .5)
     {
-        if (car1.fuel <= car1.max*2/3)
-        {
-        car1.fuel += car1.max/3;
-        }
-        else
-        {
-        car1.fuel = car1.max;
-        }
-
-
-        gas.x = c.width + 200;
-        gas.y = locations[Math.floor(Math.random()*2.9)];
+        powerup.x = c.width + powerup.w*.5;
+        powerup.y = locations[Math.floor(rand(0,locations.length-.1))];
+        
     }
 
-//draw
+    if(powerup.hit(car1))
+    {
+       car1.fuel+=powerup.fuel;
+       if(car1.fuel > car1.max)
+       {
+        car1.fuel = car1.max;
+       }
+       powerup.x = c.width + powerup.w*.5;
+       powerup.y = locations[Math.floor(rand(0,locations.length-.1))];
+    }
+
+    //This is all the vet stuff.
+    for(let i=0; i<amt; i++)
+    {
+        //Moves the vet by adding it's vx to its x position
+        vet[i].move();
+        //If the vet goes off the left of the canvas randomize it's values
+        if(vet[i].x < 0 - vet[i].w * .5)
+        {
+            vet[i].x = c.width + 200;
+            vet[i].vx = Math.floor(rand(-10,-3));
+        }
+        //If the car hit's the vet switch to the LOSE function
+        if(car1.hit(vet[i]))
+        {
+            play = lose
+        }
+
+        //draws the vet on the screen
+        vet[i].drawImg();
+    }
+
+    roadX+=-5;
+    c.style.backgroundPositionX = `${roadX}px`
+    //Draw the objects on the screen
+    bar.drawRect();
     finishLine.drawRect();
-    car1.drawCar();
-    truck1.drawCar();
-    bar1.drawRect();
-    gas.drawRect();
+    //car1.drawCar();
+    car1.drawImg();
+    powerup.drawRect();
+    //Draw the Fuel Amount on the screen
+    ctx.save();
+        ctx.font = `30px Arial black`;
+        ctx.textAlign = `left`;
+        ctx.fillText(`FUEL: ${car1.fuel}`,c.width - 200,35)
+    ctx.restore();
 }
 
-function reset()
-{
-    finishLine.x = 9000;
-    truck1.x = c.width + 200;
-    truck1.y = locations[Math.floor(Math.random()*2.9)];
-    truck1.vx = Math.floor(Math.random()*(-3 - -10) + -10);
-    truck1.h = Math.floor(Math.random()*150 + 30);
-    car1.x = 0 + 100;
-    car1.y = c.height * .5;
-    car1.fuel = 1500;
-}
-
+//Makes the game work
 function main()
 {
     ctx.clearRect(0,0,c.width,c.height);
@@ -247,3 +275,18 @@ function main()
 
     timer = window.requestAnimationFrame(main);
 }
+
+//returns a random number between a low and high range
+function rand(_low, _high)
+{
+    return Math.random()*(_high - _low) + _low;
+}
+
+
+
+           
+
+
+
+
+
