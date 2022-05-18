@@ -30,6 +30,9 @@ for(var i=0; i<amt; i++)
 }
 
 var bar = new GameObject();
+//This is to draw the container fuel bar, as without it, drawing it as a part of the normal bar will shrink it alongside the bar normally.
+var fuelBar = new GameObject();
+var fuelText = new GameObject();
 var finishLine = new GameObject();
 var powerup = new GameObject();
 
@@ -80,6 +83,7 @@ function menu()
     powerup.color = `orange`;
     //amount of fuel to add when collected.
     powerup.fuel = car1.max;
+    powerup.img = document.querySelector(`#gas`);
 
     //Fuel Bar's innitial values
     bar.y = 25;
@@ -88,12 +92,26 @@ function menu()
     bar.max = 200;
     bar.w = bar.max;
     bar.h = 20;
-    bar.color = `limegreen`
+    bar.color = `limegreen`;
+    
+    //Fuel bar container's values
+    fuelBar.x = bar.x
+    fuelBar.y = bar.y;
+    fuelBar.w = 200;
+    fuelBar.h = 20;
+    fuelBar.color = `black`;
+    fuelBar.img = document.querySelector(`#fuelBar`);
 
+    fuelText.x = c.width - 105;
+    fuelText.y = 24;
+    fuelText.h = 34;
+    fuelText.w = 200;
+    fuelText.img = document.querySelector(`#fuelText`)
     //Finish line's innitial values
     finishLine.w = 20;
     finishLine.h = c.height;
     finishLine.x = 9000;
+    finishLine.img = document.querySelector(`#finishLine`);
 
     //If the spacebar is pressed use the game function to run the program
     if(space == true)
@@ -106,6 +124,7 @@ function menu()
 //Is used when you lose
 function lose()
 {
+    drawImg();
     ctx.save();
         ctx.textAlign = `center`;
         ctx.fillText(`You Lose!`, c.width*.5, c.height*.5)
@@ -252,13 +271,18 @@ function game()
 
     roadX+=-5;
     c.style.backgroundPositionX = `${roadX}px`
+    
     //Draw the objects on the screen
+    finishLine.drawImg();
+    //Two rects, one for the background so the guard railing doesnt mess with the fuel bar graphic
+    fuelBar.drawRect();
     bar.drawRect();
-    finishLine.drawRect();
+    fuelBar.drawImg();
     //car1.drawCar();
     car1.drawImg();
-    powerup.drawRect();
+    powerup.drawImg();
     //Draw the Fuel Amount on the screen
+    fuelText.drawImg();
     ctx.save();
         ctx.font = `30px Arial black`;
         ctx.textAlign = `left`;
