@@ -16,16 +16,10 @@ class GameObject
         this.vy = 0;
 
         //this is the color
-        this.color = `hotpink`;
-
-        this.fuel = 100;
-
-        this.angle = 0;
-
-        this.force = 1;
+        this.color = `red`;
 
         //can be used to set a maximum value on something.
-        this.max = 1000;
+        this.hp = 100;
 
         this.img;
     }
@@ -44,6 +38,7 @@ class GameObject
         this.x += this.vx;
         this.y += this.vy;
     }
+
     //draws a rectangle
     drawRect()
     {
@@ -51,22 +46,6 @@ class GameObject
             ctx.fillStyle=this.color;
             ctx.translate(this.x, this.y);
             ctx.fillRect(0-this.w/2,0-this.h/2,this.w, this.h);
-        ctx.restore();
-    }
-
-    //draws a car
-    drawCar()
-    {   
-        ctx.save();
-            ctx.fillStyle=this.color;
-            this.drawRect();
-            ctx.fillStyle = `black`;
-            ctx.translate(this.x-this.w/3, this.y+this.h/2);
-            ctx.fillRect(0-10,0-10,20,20);
-        ctx.restore();
-        ctx.save();
-            ctx.translate(this.x+this.w/3, this.y+this.h/2);
-            ctx.fillRect(0-10,0-10,20,20);
         ctx.restore();
     }
 

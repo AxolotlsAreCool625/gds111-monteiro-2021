@@ -16,16 +16,19 @@ var buttons = [
     new GameObject()
 ]
 
-buttons[0].x = 100;
+buttons[0].x = 316;
 buttons[0].y = 300;
+buttons[0].img = document.querySelector(`#pokeball`);
 
-buttons[1].x = 300;
+buttons[1].x = 475;
 buttons[1].y = 300;
+buttons[1].img = document.querySelector(`#pokeball`);
 
-buttons[2].x = 500;
+buttons[2].x = 633;
 buttons[2].y = 300;
+buttons[2].img = document.querySelector(`#pokeball`);
 
-var state = game;
+var state = menu;
 
 c.addEventListener(`mousemove`, function(evt){
     var rect = c.getBoundingClientRect();
@@ -44,22 +47,19 @@ function main(e)
     state();
 }
 
+var p1;
+var ai;
+var result;
+var message;
+
 function menu()
 {
-
-}
-
-function game()
-{
-    var p1;
-    var ai;
-    var result;
-    var message = `Click Rock, Paper or Scissors`
+    message = `Choose a pokemon!`;
 
     var rps = [];
-        rps[0] = `Rock`;
-        rps[1] = `Paper`;
-        rps[2] = `Scissors`;
+        rps[0] = `Tepig`;
+        rps[1] = `Oshawatt`;
+        rps[2] = `Snivy`;
     
     for(var i=0; i < buttons.length; i++)
     {
@@ -101,9 +101,14 @@ function game()
             ctx.fillText(message, c.width/2, 100);
     ctx.restore();
 
-    buttons[0].drawRect();
-    buttons[1].drawRect();
-    buttons[2].drawRect();
+    buttons[0].drawImg();
+    buttons[1].drawImg();
+    buttons[2].drawImg();
+}
+
+function game()
+{
+    
 }
 
 function win()

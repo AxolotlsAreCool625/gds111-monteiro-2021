@@ -36,6 +36,21 @@ var fuelText = new GameObject();
 var finishLine = new GameObject();
 var powerup = new GameObject();
 
+var gameOver = new GameObject();
+gameOver.w = c.width;
+gameOver.h = c.height;
+gameOver.img = document.querySelector(`#gameEndScreen`);
+
+
+var gameWon = new GameObject();
+gameWon.w = c.width;
+gameWon.h = c.height;
+gameWon.img = document.querySelector(`#winScreen`);
+
+var gameMenu = new GameObject();
+gameMenu.w = c.width;
+gameMenu.h = c.height;
+gameMenu.img = document.querySelector(`#menuScreen`);
 
 //Stores the name of the function I want to execute.
 var play = menu;
@@ -43,6 +58,7 @@ var play = menu;
 //Starts the game and sets up each object's starting values
 function menu()
 {
+    gameMenu.drawImg();
     ctx.save();
         ctx.textAlign = `center`;
         ctx.fillText(`Press Space to Start`, c.width*.5, c.height*.5)
@@ -124,7 +140,7 @@ function menu()
 //Is used when you lose
 function lose()
 {
-    drawImg();
+    gameOver.drawImg();
     ctx.save();
         ctx.textAlign = `center`;
         ctx.fillText(`You Lose!`, c.width*.5, c.height*.5)
@@ -143,6 +159,7 @@ function lose()
 //Is used when you lose
 function win()
 {
+    gameWon.drawImg();
     ctx.save();
         ctx.textAlign = `center`;
         ctx.fillText(`You Win!`, c.width*.5, c.height*.5)

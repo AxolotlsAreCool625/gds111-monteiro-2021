@@ -1,33 +1,40 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Week 4 Canvas</title>
+        <title>Week 8-10 Final Project</title>
         <meta charset="UTF-8">
-        <meta name="author" content="Jay Aguiar">
-        <meta name="Description" content="In class work">
+        <meta name="author" content="Jonathan Monteiro">
+        <meta name="Description" content="Final Project for HTML">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div id="main">
+
             <div id="header">
-                <h1>Week 2</h1>
+                <h1>Pokemon Battle Simulator!</h1>
             </div>
-            <!--End of header-->
-            <div id="nav">
-            </div>
-            <!--End of nav-->
+
             <div id="content">
                 <canvas width="950" height="512"></canvas>
             </div>
-            <!--End of content-->
-            <div id="footer">
-                &copy;2022 Aguiar 
-            </div>
-            <!--End of footer-->   
+
         </div>
-         <img src="images/car.png" alt="car" id="car" class="graphic">
+
+        <!-- use this to let the code find the images <img src="" alt="" id="" class="graphic"> -->
+
+        <img src="images/pokeball.png" alt="pokeball button" id="pokeball" class="graphic">
+
+        <!-- These are all of the pokemon sprites-->
+        <img src="pokemon/tepig.png" alt="tepig (ai)" id="tepig_ai" class="graphic">
+        <img src="pokemon/tepigBack.png" alt="tepig (player)" id="tepig_p1" class="graphic">
+
+        <img src="pokemon/snivy.png" alt="snivy (ai)" id="snivy_ai" class="graphic">
+        <img src="pokemon/snivyBack.png" alt="snivy (player)" id="snivy_p1" class="graphic">
+
+        <img src="pokemon/oshawatt.png" alt="oshawatt (ai)" id="oshawatt_ai" class="graphic">
+        <img src="pokemon/oshawattBack.png" alt="oshawatt (player)" id="oshawatt_p1" class="graphic">
+
         <!--End of main-->
-        <script src="controls.js"></script>
         <script src="GameObject.js"></script>
         <script src="game.js"></script>
     </body>
