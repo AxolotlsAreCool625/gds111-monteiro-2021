@@ -59,10 +59,6 @@ var play = menu;
 function menu()
 {
     gameMenu.drawImg();
-    ctx.save();
-        ctx.textAlign = `center`;
-        ctx.fillText(`Press Space to Start`, c.width*.5, c.height*.5)
-    ctx.restore();
 
     roadX = 0;
 
@@ -87,7 +83,7 @@ function menu()
         vet[i].vx = Math.floor(rand(-10,-3));
         vet[i].w = 64;
         vet[i].h = 32;   
-        vet[i].img = document.querySelector(`#car`);
+        vet[i].img = document.querySelector(`#vet`);
     }
     
     //Powerups innitial value;
@@ -141,11 +137,7 @@ function menu()
 function lose()
 {
     gameOver.drawImg();
-    ctx.save();
-        ctx.textAlign = `center`;
-        ctx.fillText(`You Lose!`, c.width*.5, c.height*.5)
-    ctx.restore();
-
+    
      //If the spacebar is pressed use the menu function to run the program
      //Makes sure that space is false as true when the menu starts
      //If you don't do this the program will skip the menu and go straight to the game.
@@ -160,10 +152,6 @@ function lose()
 function win()
 {
     gameWon.drawImg();
-    ctx.save();
-        ctx.textAlign = `center`;
-        ctx.fillText(`You Win!`, c.width*.5, c.height*.5)
-    ctx.restore();
 
      //If the spacebar is pressed use the menu function to run the program
      //Makes sure that space is false as true when the menu starts

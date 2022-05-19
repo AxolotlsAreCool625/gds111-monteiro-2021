@@ -15,12 +15,11 @@ body{
 }
 #main{
     background-color:#ffff00;
-    color:rgb(255, 137, 2);
     width:950px;
     padding:20px;
 }
 #header{
-    background-color:aqua;
+    background-color:grey;
 }
 #nav{
     background-color:lime;
@@ -28,34 +27,13 @@ body{
     justify-content:center;
 }
 #content{
-    background-color:blue;
+    background-color:yellow;
 }
 
 #footer{
-    background-color:aqua;
+    background-color:grey;
 }
 
-a{
-    display:block;
-    margin-left:10px;
-    margin-right:10px;
-    background-color:bisque;
-    padding:10px;
-    border-radius:10px;
-}
-a:link{
-    color:black;
-}
-a:visited{
-    color:black;
-}
-a:hover{
-    color:cornflowerblue;
-    background-color:brown;
-}
-a:active{
-    color:cornflowerblue;
-}
 
 h1{
     color:black;
