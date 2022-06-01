@@ -39,6 +39,19 @@ p1_Pokemon.y = 460
 p1_Pokemon.w = 160
 p1_Pokemon.h = 160
 
+var p1_health = new GameObject(); 
+p1_health.img = document.querySelector(`#health`)
+p1_health.x = 126
+p1_health.y = 300
+p1_health.w = 254
+p1_health.h = 74
+
+var p1_healthBar = new GameObject(); 
+p1_healthBar.w = 96;
+p1_healthBar.h = 5;
+p1_healthBar.x = 165;
+p1_healthBar.y = 316;
+
 
 var ai_Pokemon = new GameObject();
 ai_Pokemon.img = document.querySelector(`#snivy_ai`)
@@ -46,7 +59,24 @@ ai_Pokemon.x = 620
 ai_Pokemon.y = 240
 ai_Pokemon.w = 140
 ai_Pokemon.h = 140
+ai_Pokemon.moveChoice = 0;
 
+var ai_health = new GameObject(); 
+ai_health.img = document.querySelector(`#health_ai`)
+ai_health.x = c.width - 126
+ai_health.y = 100
+ai_health.w = 254
+ai_health.h = 74
+
+var ai_healthBar = new GameObject(); 
+ai_healthBar.w = 96;
+ai_healthBar.h = 5;
+ai_healthBar.x = c.width - 146;
+ai_healthBar.y = 118;
+
+var win_screen = new GameObject(); 
+win_screen.w = c.width;
+win_screen.h = c.height;
 
 
 buttons[0].x = c.width * 1/3;
@@ -63,6 +93,43 @@ buttons[2].x = c.width * 2/3;
 buttons[2].y = 300;
 buttons[2].img = document.querySelector(`#oshawatt_ai`);
 buttons[2].w = 81;
+
+//These buttons are the moves
+buttons[3].x = c.width * 3/5;
+buttons[3].y = 360;
+buttons[3].img = document.querySelector(`#tackle`);
+buttons[3].w = 167;
+buttons[3].h = 74;
+
+buttons[4].x = c.width * 4/5;
+buttons[4].y = 360;
+buttons[4].img = document.querySelector(`#leer`);
+buttons[4].w = 167;
+buttons[4].h = 74;
+
+buttons[5].x = c.width * 3/5;
+buttons[5].y = 460;
+buttons[5].img = document.querySelector(`#howl`);
+buttons[5].w = 167;
+buttons[5].h = 74;
+
+buttons[6].x = c.width * 4/5;
+buttons[6].y = 460;
+buttons[6].img = document.querySelector(`#razorLeaf`);
+buttons[6].w = 167;
+buttons[6].h = 74;
+
+buttons[7].x = c.width * 4/5;
+buttons[7].y = 460;
+buttons[7].img = document.querySelector(`#ember`);
+buttons[7].w = 167;
+buttons[7].h = 74;
+
+buttons[8].x = c.width * 4/5;
+buttons[8].y = 460;
+buttons[8].img = document.querySelector(`#aquaJet`);
+buttons[8].w = 167;
+buttons[8].h = 74;
 
 var state = menu;
 
@@ -109,27 +176,38 @@ function menu()
             if(p1 == 0)
             {
                 p1_Pokemon.img = document.querySelector(`#snivy_p1`);
+                p1_Pokemon.name = `Snivy`;
+                win_screen = document.querySelector(`#snivy_win`)
             }
             else if (p1 == 1)
             {
                 p1_Pokemon.img = document.querySelector(`#tepig_p1`);
+                p1_Pokemon.name = `Tepig`;
+                win_screen = document.querySelector(`#tepig_win`)
+
             }
             else
             {
                 p1_Pokemon.img = document.querySelector(`#oshawatt_p1`);
+                p1_Pokemon.name = `Oshawatt`;
+                win_screen = document.querySelector(`#oshawatt_win`)
+
             }
 
             if(ai == 0)
             {
                 ai_Pokemon.img = document.querySelector(`#snivy_ai`);
+                ai_Pokemon.name = `Snivy`;
             }
             else if (ai == 1)
             {
                 ai_Pokemon.img = document.querySelector(`#tepig_ai`);
+                ai_Pokemon.name = `Tepig`;
             }
             else
             {
                 ai_Pokemon.img = document.querySelector(`#oshawatt_ai`);
+                ai_Pokemon.name = `Oshawatt`;
             }
 
             message = `You Picked: ${rps[p1]} | AI Picked: ${rps[ai]}`;
@@ -176,13 +254,204 @@ function game()
     fightBackground.drawImg();
     p1_Pokemon.drawImg();
     ai_Pokemon.drawImg();
+
+    p1_health.drawImg();
+
+    ctx.save();
+            ctx.textAlign =`center`;
+            ctx.fillStyle = `#000000`;
+            ctx.font = `32px Arial`;
+            ctx.fillText(p1_Pokemon.name, 80, 300);
+    ctx.restore();
+
+    p1_healthBar.drawRect();
+
+    ai_health.drawImg();
+
+    ctx.save();
+            ctx.textAlign =`center`;
+            ctx.fillStyle = `#000000`;
+            ctx.font = `32px Arial`;
+            ctx.fillText(ai_Pokemon.name, c.width - 80, 100);
+    ctx.restore();
+
+    ai_healthBar.drawRect();
     
+    buttons[3].drawImg();
+    buttons[4].drawImg();
+    buttons[5].drawImg();
+
+    if(p1 == 0)
+    {
+        buttons[6].drawImg();
+    }
+    else if (p1 == 1)
+    {
+        buttons[7].drawImg();
+    }
+    else
+    {
+        buttons[8].drawImg();
+    }
+
+    for(var i=0; i < 9; i++)
+{
+    if(buttons[i].hitPoint(mouse))
+    {
+
+    if(buttons[3].hitPoint(mouse))
+    {
+        ai_Pokemon.health -= (p1_attack - ai_defence);
+    }
+
+    if(buttons[4].hitPoint(mouse))
+    {
+        ai_Pokemon.defence *= .5;
+    }
+
+    if(buttons[5].hitPoint(mouse))
+    {
+        p1_Pokemon.attack *= 1.5;
+    }
     
+    if(buttons[6].hitPoint(mouse))
+    {
+        if(ai == 0)
+        {
+            ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+        }
+        if(ai == 1)
+        {
+            ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+        }
+        if(ai == 2)
+        {
+            ai_Pokemon.health -= (p1_Pokemon.attack * 2 - ai_Pokemon.defence);
+        }
+    }
+
+    if(buttons[7].hitPoint(mouse))
+    {
+        if(ai == 0)
+        {
+            ai_Pokemon.health -= (p1_Pokemon.attack * 2 - ai_Pokemon.defence);
+        }
+        if(ai == 1)
+        {
+            ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+        }
+        if(ai == 2)
+        {
+            ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+        }
+    }
+    
+    if(buttons[8].hitPoint(mouse))
+    {
+        if(ai == 0)
+        {
+            ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+        }
+        if(ai == 1)
+        {
+            ai_Pokemon.health -= (p1_Pokemon.attack * 2 - ai_Pokemon.defence);
+        }
+        if(ai == 2)
+        {
+            ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+        }
+    }
+
+    ai_Pokemon.moveChoice = Math.floor(rand(0,5.9));
+
+    //type attack
+    if(ai_Pokemon.moveChoice == 0 || ai_Pokemon.moveChoice == 1)
+    {
+        if(ai == 0)
+        {
+            if(p1 == 0)
+            {
+                p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+            }
+            if(p1 == 1)
+            {
+                p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+            }
+            if(p1 == 2)
+            {
+            p1_Pokemon.health -= (ai_Pokemon.attack * 2 - p1_Pokemon.defence);
+            }
+        }
+        if(ai == 1)
+        {
+            if(p1 == 0)
+            {
+                p1_Pokemon.health -= (ai_Pokemon.attack * 2 - p1_Pokemon.defence);
+            }
+            if(p1 == 1)
+            {
+                p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+            }
+            if(p1 == 2)
+            {
+                p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+            }
+        }
+        if(ai == 2)
+        {
+            if(p1 == 0)
+            {
+                p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+            }
+            if(p1 == 1)
+            {
+                p1_Pokemon.health -= (ai_Pokemon.attack * 2 - p1_Pokemon.defence);
+            }
+            if(p1 == 2)
+            {
+                p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+            }
+        }
+    }
+
+        //normal attack
+    else if (ai_Pokemon.moveChoice == 2 || ai_Pokemon.moveChoice == 3)
+    {
+        p1_Pokemon.health -= (ai_Pokemon.attack - p1_Pokemon.defence);
+    }
+    //leer
+    else if (ai_Pokemon.moveChoice == 4)
+    {
+        p1_Pokemon.defence *= 0.5;
+    }
+    //howl
+    else
+    {
+        ai_Pokemon.attack *= 2;
+    }
+    }
+
+    if(p1_Pokemon.health <= 0 || ai <= 0)
+    {
+        if(ai_Pokemon.health <= 0)
+        {
+            p1_status = won
+        }
+        else
+        {
+            p1_status = lost
+        }
+    }
+    
+
+    
+}
 }
 
 function win()
 {
     
+
 }
 
 function lose()

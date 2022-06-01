@@ -19,12 +19,12 @@ class GameObject
         this.vy = 0;
 
         //this is the color
-        this.color = `red`;
+        this.color = `#32CD32`;
 
         //Values of pokemon
-        this.hp = 100;
-        this.attack = 33;
-        this.defence = 0;
+        this.hp = 96;
+        this.attack = 32;
+        this.defence = 16;
 
         this.img;
     }

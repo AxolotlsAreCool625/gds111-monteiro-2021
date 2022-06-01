@@ -7,6 +7,7 @@ function press(e)
 {
     if(e.keyCode == 32){space=true;}
 }
+
 function release(e)
 {
     if(e.keyCode == 32){
@@ -25,13 +26,23 @@ function release(e)
             if (p1_status == won)
             {
                 state = win
-                won()
+                win()
             }
             else if (p1_status == lost)
             {
                 state = lose
-                lost()
+                lose()
             }
+        }
+        if (state == win)
+        {
+            state = menu
+            menu()
+        }
+        if (state == lose)
+        {
+            state = menu
+            menu()
         }
     
     
