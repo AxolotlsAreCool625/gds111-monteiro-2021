@@ -23,12 +23,12 @@ function release(e)
 
         if (state == game)
         {
-            if (p1_status == won)
+            if (p1_status == `won`)
             {
                 state = win
                 win()
             }
-            else if (p1_status == lost)
+            else if (p1_status == `lost`)
             {
                 state = lose
                 lose()
