@@ -10,7 +10,8 @@ function press(e)
 
 function release(e)
 {
-    if(e.keyCode == 32){
+    if(e.keyCode == 32)
+    {
         
         if (state == menu)
         {
@@ -21,19 +22,8 @@ function release(e)
             }
         }
 
-        if (state == game)
-        {
-            if (p1_status == `won`)
-            {
-                state = win
-                win()
-            }
-            else if (p1_status == `lost`)
-            {
-                state = lose
-                lose()
-            }
-        }
+        
+    
         if (state == win)
         {
             state = menu

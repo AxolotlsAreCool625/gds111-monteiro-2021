@@ -32,6 +32,9 @@ fightBackground.img = document.querySelector(`#battleBackground`)
 fightBackground.w = c.width;
 fightBackground.h = c.height;
 
+var p1_decision;
+var ai_decision;
+
 var p1_Pokemon = new GameObject(); 
 p1_Pokemon.img = document.querySelector(`#snivy_p1`)
 p1_Pokemon.x = 180
@@ -79,7 +82,12 @@ ai_healthBar.y = 118;
 var win_screen = new GameObject(); 
 win_screen.w = c.width;
 win_screen.h = c.height;
+win_screen.img = document.querySelector(`#snivy_win`)
 
+var lose_screen = new GameObject(); 
+lose_screen.w = c.width;
+lose_screen.h = c.height;
+lose_screen.img = document.querySelector(`#snivy_lose`)
 
 buttons[0].x = c.width * 1/3;
 buttons[0].y = 300;
@@ -156,11 +164,16 @@ function main(e)
 var p1 = -1;
 var ai;
 var message;
-var p1_status;
 
 function menu()
 {
-    p1_status = `nothing`;
+    p1_Pokemon.health = 96
+    p1_Pokemon.attack = 32
+    p1_Pokemon.defence = 16
+    ai_Pokemon.moveChoice = 0;
+    ai_Pokemon.health = 96
+    ai_Pokemon.attack = 32
+    ai_Pokemon.defence = 16
 
     message = `Choose a pokemon!`;
 
@@ -180,20 +193,26 @@ function menu()
             {
                 p1_Pokemon.img = document.querySelector(`#snivy_p1`);
                 p1_Pokemon.name = `Snivy`;
-                win_screen = document.querySelector(`#snivy_win`)
+                win_screen.img = document.querySelector(`#snivy_win`)
+                lose_screen.img = document.querySelector(`#snivy_lose`)
+
             }
             else if (p1 == 1)
             {
                 p1_Pokemon.img = document.querySelector(`#tepig_p1`);
                 p1_Pokemon.name = `Tepig`;
-                win_screen = document.querySelector(`#tepig_win`)
+                win_screen.img = document.querySelector(`#tepig_win`)
+                lose_screen.img = document.querySelector(`#tepig_lose`)
+
 
             }
             else
             {
                 p1_Pokemon.img = document.querySelector(`#oshawatt_p1`);
                 p1_Pokemon.name = `Oshawatt`;
-                win_screen = document.querySelector(`#oshawatt_win`)
+                win_screen.img = document.querySelector(`#oshawatt_win`)
+                lose_screen.img = document.querySelector(`#oshawatt_lose`)
+
 
             }
 
@@ -250,153 +269,14 @@ function menu()
     
 }
 
-function turn()
-{
-    for(var i=0; i < 3; i++)
-    {   
-        if(buttons[i].hitPoint(mouse))
-        {
-            movePicked = i
-            if(movePicked == 3)
-            {
-                ai_Pokemon.health -= (p1_Pokemon.attack - ai_Pokemon.defence);
-            }
-
-            if(buttons[4].hitPoint(mouse))
-            {
-                ai_Pokemon.defence *= .5;
-            }
-
-            if(buttons[5].hitPoint(mouse))
-            {
-                p1_Pokemon.attack *= 1.5;
-            }
-    
-            if(buttons[6].hitPoint(mouse))
-            {
-                if(ai == 0)
-                {
-                    ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
-                }
-                if(ai == 1)
-                {
-                    ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
-                }
-                if(ai == 2)
-                {
-                    ai_Pokemon.health -= (p1_Pokemon.attack * 2 - ai_Pokemon.defence);
-                }
-            }
-
-            if(buttons[7].hitPoint(mouse))
-            {
-                if(ai == 0)
-                {
-                    ai_Pokemon.health -= (p1_Pokemon.attack * 2 - ai_Pokemon.defence);
-                }
-                if(ai == 1)
-                {
-                    ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
-                }
-                if(ai == 2)
-                {
-                    ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
-                }
-            }
-    
-            if(buttons[8].hitPoint(mouse))
-            {
-                if(ai == 0)
-                {
-                    ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
-                }
-                if(ai == 1)
-                {
-                    ai_Pokemon.health -= (p1_Pokemon.attack * 2 - ai_Pokemon.defence);
-                }
-                if(ai == 2)
-                {
-                    ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
-                }
-            }
-
-            ai_Pokemon.moveChoice = Math.floor(rand(0,5.9));
-
-            //type attack
-            if(ai_Pokemon.moveChoice == 0 || ai_Pokemon.moveChoice == 1)
-            {
-                if(ai == 0)
-                {
-                    if(p1 == 0)
-                    {
-                        p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
-                    }
-                    if(p1 == 1)
-                    {
-                        p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
-                    }
-                    if(p1 == 2)
-                    {
-                    p1_Pokemon.health -= (ai_Pokemon.attack * 2 - p1_Pokemon.defence);
-                    }
-                }
-                if(ai == 1)
-                {
-                    if(p1 == 0)
-                    {
-                        p1_Pokemon.health -= (ai_Pokemon.attack * 2 - p1_Pokemon.defence);
-                    }
-                    if(p1 == 1)
-                    {
-                        p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
-                    }
-                    if(p1 == 2)
-                    {
-                        p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
-                    }
-                }
-                if(ai == 2)
-                {
-                    if(p1 == 0)
-                    {
-                        p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
-                    }
-                    if(p1 == 1)
-                    {
-                        p1_Pokemon.health -= (ai_Pokemon.attack * 2 - p1_Pokemon.defence);
-                    }
-                    if(p1 == 2)
-                    {
-                        p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
-                    }
-                }
-            }
-
-            //normal attack
-            else if (ai_Pokemon.moveChoice == 2 || ai_Pokemon.moveChoice == 3)
-            {
-                p1_Pokemon.health -= (ai_Pokemon.attack - p1_Pokemon.defence);
-            }
-            //leer
-            else if (ai_Pokemon.moveChoice == 4)
-            {
-                p1_Pokemon.defence *= 0.5;
-            }
-            //howl
-            else
-            {
-                ai_Pokemon.attack *= 2;
-            }
-        }
-    }
-    state = game
-}
-
-
 function game()
 {
     var p1_hp;
     var ai_hp;
+    p1_decision =` `;
+
+    ai_decision =` `;
+
 
     ctx.clearRect(0,0,c.width,c.height)
     fightBackground.drawImg();
@@ -471,16 +351,40 @@ function game()
             if(movePicked == 3)
             {
                 ai_Pokemon.health -= (p1_Pokemon.attack - ai_Pokemon.defence);
+
+                p1_decision =`You used Tackle!`;
+                    ctx.save();
+                    ctx.textAlign =`center`;
+                    ctx.fillStyle = `#ffffff`;
+                    ctx.font = `32px Arial`;
+                    ctx.fillText(p1_decision, c.width/4, 100);
+                ctx.restore();
             }
 
             if(buttons[4].hitPoint(mouse))
             {
                 ai_Pokemon.defence *= .5;
+
+                p1_decision =`You used Leer!`;
+                    ctx.save();
+                    ctx.textAlign =`center`;
+                    ctx.fillStyle = `#ffffff`;
+                    ctx.font = `32px Arial`;
+                    ctx.fillText(p1_decision, c.width/4, 100);
+                ctx.restore();
             }
 
             if(buttons[5].hitPoint(mouse))
             {
                 p1_Pokemon.attack *= 1.5;
+
+                p1_decision =`You used Howl!`;
+                    ctx.save();
+                    ctx.textAlign =`center`;
+                    ctx.fillStyle = `#ffffff`;
+                    ctx.font = `32px Arial`;
+                    ctx.fillText(p1_decision, c.width/4, 100);
+                ctx.restore();
             }
     
             if(buttons[6].hitPoint(mouse))
@@ -488,15 +392,27 @@ function game()
                 if(ai == 0)
                 {
                     ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+                    //p1_decision =`You used Razor Leaf! It wasn't effective...`;
                 }
                 if(ai == 1)
                 {
                     ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+                    //p1_decision =`You used Razor Leaf! It wasn't effective...`;
                 }
                 if(ai == 2)
                 {
                     ai_Pokemon.health -= (p1_Pokemon.attack * 2 - ai_Pokemon.defence);
+                    p1_decision =`You used Razor Leaf! It was super effective!`;
+                ctx.restore();
                 }
+
+                ctx.save();
+                    ctx.textAlign =`center`;
+                    ctx.fillStyle = `#ffffff`;
+                    ctx.font = `32px Arial`;
+                    ctx.fillText(p1_decision, c.width/4, 100);
+                ctx.restore();
+
             }
 
             if(buttons[7].hitPoint(mouse))
@@ -504,15 +420,24 @@ function game()
                 if(ai == 0)
                 {
                     ai_Pokemon.health -= (p1_Pokemon.attack * 2 - ai_Pokemon.defence);
+                    p1_decision =`You used Ember! It was super effective!`;
                 }
                 if(ai == 1)
                 {
                     ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+                    p1_decision =`You used Ember! It wasn't effective...`;
                 }
                 if(ai == 2)
                 {
                     ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+                    p1_decision =`You used Ember! It wasn't effective...`;
                 }
+
+                ctx.save();
+                ctx.textAlign =`center`;
+                ctx.fillStyle = `#ffffff`;
+                ctx.font = `32px Arial`;
+                ctx.fillText(p1_decision, c.width/4, 100);
             }
     
             if(buttons[8].hitPoint(mouse))
@@ -520,15 +445,28 @@ function game()
                 if(ai == 0)
                 {
                     ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+                    p1_decision =`You used Aqua Jet! It wasn't effective...`;
                 }
+
                 if(ai == 1)
                 {
                     ai_Pokemon.health -= (p1_Pokemon.attack * 2 - ai_Pokemon.defence);
+                    p1_decision =`You used Aqua Jet! It was super effective!`;
+
                 }
+
                 if(ai == 2)
                 {
                     ai_Pokemon.health -= (p1_Pokemon.attack * 0.5 - ai_Pokemon.defence);
+                    p1_decision =`You used Aqua Jet! It wasn't effective...`;
+
                 }
+                
+                ctx.save();
+                ctx.textAlign =`center`;
+                ctx.fillStyle = `#ffffff`;
+                ctx.font = `32px Arial`;
+                ctx.fillText(p1_decision, c.width/4, 100);
             }
 
             ai_Pokemon.moveChoice = Math.floor(rand(0,5.9));
@@ -541,45 +479,75 @@ function game()
                     if(p1 == 0)
                     {
                         p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+                        ai_decision =`AI used Razor Leaf! It wasn't effective...`;
                     }
                     if(p1 == 1)
                     {
                         p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+                        ai_decision =`AI used Razor Leaf! It wasn't effective...`;
                     }
                     if(p1 == 2)
                     {
-                    p1_Pokemon.health -= (ai_Pokemon.attack * 2 - p1_Pokemon.defence);
+                        p1_Pokemon.health -= (ai_Pokemon.attack * 2 - p1_Pokemon.defence);
+                        ai_decision =`AI used Razor Leaf! It was super effective!`;
                     }
+
+                        ctx.save();
+                            ctx.textAlign =`center`;
+                            ctx.fillStyle = `#ffffff`;
+                            ctx.font = `32px Arial`;
+                            ctx.fillText(ai_decision, c.width/4, 140);
+                        ctx.restore();
                 }
                 if(ai == 1)
                 {
                     if(p1 == 0)
                     {
                         p1_Pokemon.health -= (ai_Pokemon.attack * 2 - p1_Pokemon.defence);
+                        ai_decision =`AI used Ember! It was super effective!`;
                     }
                     if(p1 == 1)
                     {
                         p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+                        ai_decision =`AI used Ember! It wasn't effective...`;
                     }
                     if(p1 == 2)
                     {
                         p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+                        ai_decision =`AI used Ember! It wasn't effective...`;
                     }
+
+                    ctx.save();
+                    ctx.textAlign =`center`;
+                    ctx.fillStyle = `#ffffff`;
+                    ctx.font = `32px Arial`;
+                    ctx.fillText(ai_decision, c.width/4, 140);
+                ctx.restore();
                 }
                 if(ai == 2)
                 {
                     if(p1 == 0)
                     {
                         p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+                        ai_decision =`AI used Aqua Jet! It wasn't effective...`;
                     }
                     if(p1 == 1)
                     {
                         p1_Pokemon.health -= (ai_Pokemon.attack * 2 - p1_Pokemon.defence);
+                        ai_decision =`AI used Aqua Jet! It was super effective!`;
                     }
                     if(p1 == 2)
                     {
                         p1_Pokemon.health -= (ai_Pokemon.attack * 0.5 - p1_Pokemon.defence);
+                        ai_decision =`AI used Aqua Jet! It wasn't effective...`;
                     }
+
+                    ctx.save();
+                    ctx.textAlign =`center`;
+                    ctx.fillStyle = `#ffffff`;
+                    ctx.font = `32px Arial`;
+                    ctx.fillText(ai_decision, c.width/4, 140);
+                ctx.restore();
                 }
             }
 
@@ -587,21 +555,45 @@ function game()
             else if (ai_Pokemon.moveChoice == 2 || ai_Pokemon.moveChoice == 3)
             {
                 p1_Pokemon.health -= (ai_Pokemon.attack - p1_Pokemon.defence);
+                ai_decision =`AI used Tackle!`;
+
+                ctx.save();
+                ctx.textAlign =`center`;
+                ctx.fillStyle = `#ffffff`;
+                ctx.font = `32px Arial`;
+                ctx.fillText(ai_decision, c.width/4, 140);
+            ctx.restore();
             }
             //leer
             else if (ai_Pokemon.moveChoice == 4)
             {
                 p1_Pokemon.defence *= 0.5;
+                ai_decision =`AI used Leer!`;
+
+                ctx.save();
+                ctx.textAlign =`center`;
+                ctx.fillStyle = `#ffffff`;
+                ctx.font = `32px Arial`;
+                ctx.fillText(ai_decision, c.width/4, 140);
+            ctx.restore();
             }
             //howl
             else
             {
                 ai_Pokemon.attack *= 2;
+                ai_decision =`AI used Howl!`;
+
+                ctx.save();
+                ctx.textAlign =`center`;
+                ctx.fillStyle = `#ffffff`;
+                ctx.font = `32px Arial`;
+                ctx.fillText(ai_decision, c.width/4, 140);
+            ctx.restore();
             }
         }
     }
         
-    if(p1_Pokemon.health <= 0 || ai <= 0)
+    if(p1_Pokemon.health <= 0 || ai_Pokemon.health <= 0)
     {
         if(ai_Pokemon.health <= 0)
         {
@@ -621,13 +613,13 @@ function game()
 function win()
 {
     ctx.clearRect(0,0,c.width,c.height)
-    win_screen.drawImg()
+    win_screen.drawImg();
     //this is so the control can check if the player lost or won, and bring them to the right state
-    p1_status = `nothing`;
 }
 
 function lose()
 {
+    ctx.clearRect(0,0,c.width,c.height)
+    lose_screen.drawImg();
     //this is so the control can check if the player lost or won, and bring them to the right state
-    p1_status = `nothing`;
 }
