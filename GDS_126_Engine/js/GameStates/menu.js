@@ -3,16 +3,17 @@ This file contains all of the code for the Main Menu
 ----------------------------------*/
 
 var startButton = new GameObject();
-startButton.img.src= "images/skull.png"
-startButton.width=200;
-startButton.hitBoxWidth=800
+startButton.img.src= "images/button.png"
+startButton.width=800;
+startButton.height=200;
+//startButton.hitBoxWidth=0;
 console.log(startButton.collisionPoints.right)
 
 
 
 
 var menuBackground = new GameObject();
-menuBackground.img.src = "images/nightsky.jpg"
+menuBackground.img.src = "images/sky.png"
 menuBackground.width=canvas.width
 menuBackground.height=canvas.height
 
@@ -29,18 +30,18 @@ gameStates[`menu`] =function(){
 		}
 
 		//Hover Effect Graffic
-		startButton.img.src= "images/skull.png"
+		startButton.img.src= "images/hoverbutton.png"
 		var buttonPattern = context.createPattern(startButton.img, `repeat`);
 		startButton.color = buttonPattern
 	}
 	else
 	{
 		//Default Button Graphic
-		startButton.img.src= "images/skull_01.png"
+		startButton.img.src= "images/button.png"
 		var buttonPattern = context.createPattern(startButton.img, `repeat`);
 		startButton.color = buttonPattern
 	}
-	
+
 	menuBackground.drawStaticImage();
 	startButton.render()
 }

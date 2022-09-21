@@ -14,12 +14,13 @@ var ground = new GameObject({width:canvas.width*10, x:canvas.width*10/2,height:6
 ground.img.src=`images/ground.png`
 
 //A platform
-var plat = new GameObject({width:256, height:64,y:canvas.height-200, color:"green"})
+var platform = new GameObject({width:256, height:64,y:canvas.height-200, color:"green"})
+platform.img.src=`images/platform.png`
 
 //A level object when it is moved other objects move with it.
 var level = new GameObject({x:0,y:0});
 ground.world = level;
-plat.world = level;
+platform.world = level;
 
 //Cave foreground Tile Grid
 var cave = new Grid(caveData, {world:level, x:1024, tileHeight:64, tileWidth:64});
@@ -42,7 +43,7 @@ g1.add([ground,leftBorder, caveHit.grid])
 
 //Used to draw the rectangles
 var rects = new Group();
-rects.add([ground,plat])
+rects.add([ground,platform])
 
 //used to render the sprites
 var sprites = new Group();
@@ -53,7 +54,7 @@ front.add([cave.grid])
 
 //list of items to be rendered in the level
 var levelItems=new Group();
-levelItems.add([caveBack.grid, ground, plat, cave.grid]);
+levelItems.add([caveBack.grid, ground, platform, cave.grid]);
 
 //Very back background
 var sky = new GameObject({width:canvas.width, height:canvas.height, color:"cyan"})
@@ -189,7 +190,7 @@ gameStates[`level1`] = function()
 
 	let offset = {x:Math.round(wiz.vx), y:Math.round(wiz.vy)}
 	
-	while (plat.overlap(wiz.bottom) && wiz.vy>=0)
+	while (platform.overlap(wiz.bottom) && wiz.vy>=0)
 	{
 		wiz.vy=0;
 		wiz.canJump = true;
@@ -255,9 +256,11 @@ gameStates[`level1`] = function()
 	
 	//Sets up pattern for the ground
 	var groundPattern = context.createPattern(ground.img, `repeat`);
+	var platformPattern = context.createPattern(platform.img, `repeat`);
+
 	//Applies pattern to ground and platform
 	ground.color = groundPattern
-	plat.color = groundPattern
+	platform.color = platformPattern
 
 	//Sets up pattern for the sky
 	var skyPattern = context.createPattern(sky.img, `repeat`);
@@ -303,7 +306,7 @@ gameStates[`level1`] = function()
 		while(g1.collide(bullets[i].bottom) && bullets[i].vy>=0)
 		{
 			
-			bullets[i].vy=-100;
+			bullets[i].vy=-60;
 			bullets[i].y--;
 		}		
 	}
