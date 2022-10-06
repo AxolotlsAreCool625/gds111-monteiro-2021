@@ -21,13 +21,28 @@ function animate()
 
 	if(w)
 	{
+		
 		console.log("Moving Up");
-		player1.y += -4;
+		if (player1.y > 0 + player1.height/2)
+		{
+			player1.y += -4;
+		}
+		else 
+		{
+			player1.y = 0 + player1.height/2
+		}
 	}
 	if(s)
 	{
 		console.log("Moving Down");
-		player1.y += 4;
+		if (player1.y < canvas.height - player1.height/2)
+		{
+			player1.y += 4;
+		}
+		else 
+		{
+			player1.y = canvas.height - player1.height/2
+		}
 	}
 
     player1.drawRect();
