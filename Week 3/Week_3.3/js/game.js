@@ -5,9 +5,14 @@ var timer;
 var interval = 1000/60;
 var collision1;
 var collision2;
+var score1 = 0;
+var score2 = 0;
+var message;
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
+var c = document.querySelector(`canvas`);
+var ctx = c.getContext(`2d`);
 
 timer = setInterval(animate, interval);
 
@@ -28,18 +33,15 @@ ball.vx = -8;
 ball.vy = 8;
 ball.width = 30;
 
-
 //ball bouncing code
 function ballBounce()
 {
 	if(ball.x > canvas.width - ball.width/2)
 	{
-		/*ball.x = canvas.width - ball.width/2
-		ball.vx = -ball.vx
-		ball.color = "#5500ff";*/
 		ball.x = canvas.width/2
 		ball.y = canvas.height/2
 		ball.color = "#000000";
+		score1 += 1;
 	}
 
 	if(ball.x < 0 - ball.width)
@@ -47,6 +49,7 @@ function ballBounce()
 		ball.x = canvas.width/2
 		ball.y = canvas.height/2
 		ball.color = "#000000";
+		score2 += 1;
 	}
 
 	if(ball.y > canvas.height - ball.height/2)
@@ -68,6 +71,40 @@ function animate()
 {
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);
+
+	var message = `Player 1 | Player 2`;
+
+	ctx.save();
+            ctx.textAlign =`center`;
+            ctx.fillStyle = `#000000`;
+            ctx.font = `25px Arial`;
+            ctx.fillText(message, c.width/2, 25);
+    ctx.restore();
+
+	ctx.save();
+            ctx.textAlign =`center`;
+            ctx.fillStyle = `#000000`;
+            ctx.font = `20px Arial`;
+            ctx.fillText(score1, c.width/2 - 10, 52);
+    ctx.restore();
+
+	var message = `-`;
+
+	ctx.save();
+            ctx.textAlign =`center`;
+            ctx.fillStyle = `#000000`;
+            ctx.font = `20px Arial`;
+            ctx.fillText(message, c.width/2, 50);
+    ctx.restore();
+
+	ctx.save();
+            ctx.textAlign =`center`;
+            ctx.fillStyle = `#000000`;
+            ctx.font = `20px Arial`;
+            ctx.fillText(score2, c.width/2 + 10, 52);
+    ctx.restore();
+
+	var message = `Player 1 | Player 2`;
 
 	if(w)
 	{
