@@ -32,6 +32,10 @@ ball.y = canvas.height/2;
 ball.vx = -8;
 ball.vy = 8;
 ball.width = 30;
+ball.height = 30;
+
+var img = document.getElementById("Ric");
+
 
 //ball bouncing code
 function ballBounce()
@@ -40,7 +44,7 @@ function ballBounce()
 	{
 		ball.x = canvas.width/2
 		ball.y = canvas.height/2
-		ball.color = "#000000";
+		//ball.color = "#000000";
 		score1 += 1;
 	}
 
@@ -48,7 +52,7 @@ function ballBounce()
 	{
 		ball.x = canvas.width/2
 		ball.y = canvas.height/2
-		ball.color = "#000000";
+		//ball.color = "#000000";
 		score2 += 1;
 	}
 
@@ -56,14 +60,14 @@ function ballBounce()
 	{
 		ball.y = canvas.height - ball.height/2
 		ball.vy = -ball.vy
-		ball.color = "#0000ff";
+		//ball.color = "#0000ff";
 	}
 
 	if(ball.y < 0 + ball.height/2)
 	{
 		ball.y = 0 + ball.height/2
 		ball.vy = -ball.vy
-		ball.color = "#0000ff";
+		//ball.color = "#0000ff";
 	}
 }
 
@@ -179,7 +183,7 @@ function animate()
 	ball.y += ball.vy;
 	
 	//Update the Screen
-	ball.drawCircle();
+	//ball.drawCircle();
 
 	ballBounce();
 
@@ -225,7 +229,7 @@ function animate()
 			ball.vx = -ball.vx
 			console.log("Collision Bottom");
 		}
-			ball.color = "#00ff55";
+			//ball.color = "#00ff55";
 	}
 
 	if (collision2 == "true")
@@ -252,8 +256,10 @@ function animate()
 			ball.vy = -8
 			console.log("Collision Bottom");
 		}
-			ball.color = "#00ff55";
+			//ball.color = "#00ff55";
 	}
+
+	context.drawImage(img, ball.x - ball.width/1.33, ball.y - ball.height/1.33, ball.width*1.5, ball.height*1.5);
 
 	
 

@@ -20,6 +20,8 @@ ball = new GameObject();
 ball.vx = 2;
 ball.vy = 2;
 ball.width = 60;
+ball.height = 60;
+
 
 function animate()
 {

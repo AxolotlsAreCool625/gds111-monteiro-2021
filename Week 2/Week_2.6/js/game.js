@@ -20,6 +20,7 @@ ball.y = canvas.height/2;
 ball.vx = 4;
 ball.vy = 4;
 ball.width = 30;
+ball.height = 30;
 
 
 //ball bouncing code, it took a ching of space in the animate function so I compliled it into its own function

@@ -27,7 +27,7 @@ ball.y = canvas.height/2;
 ball.vx = -8;
 ball.vy = 8;
 ball.width = 30;
-
+ball.height = 30;
 
 //ball bouncing code
 function ballBounce()
