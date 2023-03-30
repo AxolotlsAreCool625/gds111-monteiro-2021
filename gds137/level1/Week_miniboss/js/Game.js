@@ -1,5 +1,4 @@
 //Declare my variables
-
 var canvas;
 var ctx;
 var c;
