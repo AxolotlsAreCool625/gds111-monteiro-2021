@@ -20,5 +20,14 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 
+	if(w)
+	{
+		player1.y += -2;
+	}
+	if(s)
+	{
+		player1.y += 2;
+	}
+
 	player1.drawRect();
 }
