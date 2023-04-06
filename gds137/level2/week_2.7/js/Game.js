@@ -84,6 +84,11 @@ function animate()
 		collision = "false";
 	}
 
+	context.strokeRect(player1.x- player1.width/2, player1.y - player1.height/2, player1.width, player1.height/3)
+	context.strokeRect(player1.x- player1.width/2, player1.y - player1.height/6, player1.width, player1.height/3)
+	context.strokeRect(player1.x- player1.width/2, player1.y + player1.height/6, player1.width, player1.height/3)
+
+
 	if (collision == "true")
 	{
 		if (ball.y < player1.y - player1.height/6) 
