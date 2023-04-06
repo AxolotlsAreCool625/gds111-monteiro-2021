@@ -17,7 +17,8 @@ var message;
 	ctx = c.getContext(`2d`);
 
 	//Instantiate the Ball
-	ball = new Ball();
+		ball.vx = 4;
+	ball.vy = 4;ball = new Ball();
 	ball.vx = 4;
 	ball.vy = 4;
 
