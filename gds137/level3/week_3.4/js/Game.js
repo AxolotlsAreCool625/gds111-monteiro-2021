@@ -2,6 +2,8 @@ var canvas;
 var context;
 var interval = 1000/60;
 
+var ballImg = document.getElementById("ric");
+
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 
@@ -31,13 +33,20 @@ ball.width = 40;
 ball.height = 40;
 ball.vx = 6;
 
-ball.drawCircle();
-
-
 function animate()
 {
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
+
+	context.save();
+	context.strokeStyle = "#777";
+	context.beginPath();
+	context.moveTo(canvas.width/2, 0);
+	context.lineTo(canvas.width/2, canvas.height);
+	context.closePath();
+	context.lineWidth = 4; 
+	context.stroke();
+	context.restore();
 
 	//ball movement
 
@@ -63,8 +72,7 @@ function animate()
 		ball.vy = -ball.vy;
 	}
 
-	ball.drawCircle();
-	context.strokeRect(ball.x- ball.width/2, ball.y - ball.height/2, ball.width, ball.height)
+	context.drawImage(ballImg, ball.x - ball.width/1.67, ball.y - ball.height/1.67, ball.width * 1.2, ball.height * 1.2);
 
 	//player movement
 	if(w) {
@@ -111,9 +119,9 @@ function animate()
 	player2.drawRect();
 	
 	context.font = "40px Verdana";
-	context.fillText("Player 1  |  Player 2", canvas.width/3, 60);
-	context.fillText(player1Score, canvas.width * (3.1/8), 120);
-	context.fillText(player2Score, canvas.width * (5/8), 120);
+	context.fillText("Player 1  |  Player 2", canvas.width/3.28, 60);
+	context.fillText(player1Score, canvas.width * (1.5/4), 120);
+	context.fillText(player2Score, canvas.width * (2.4/4), 120);
 
 
 	if(ball.left() < player1.right() && ball.right() > player1.left() && ball.top() < player1.bottom() && ball.bottom() > player1.top() )
