@@ -12,6 +12,7 @@ player1.height = 220;
 player1.width = 20;
 player1.x = canvas.width/16
 player1.y = canvas.height/2;
+var player1Score = 0;
 
 player1.drawRect();
 
@@ -21,6 +22,7 @@ player2.width = 20;
 player2.x = canvas.width* (15/16)
 player2.y = canvas.height/2;
 player2.color = '#00f';
+var player2Score = 0;
 
 player2.drawRect();
 
@@ -43,6 +45,14 @@ function animate()
 
 	if(ball.x < 0 || ball.x > canvas.width - ball.width/2)
 	{
+		if (ball.x < 0)
+		{
+			player2Score += 1;
+		}
+		else
+		{
+			player1Score += 1;
+		}
 		ball.x = canvas.width/2;
 		ball.color = "#ff0000";
 	}
@@ -98,6 +108,12 @@ function animate()
 
 	player1.drawRect();
 	player2.drawRect();
+	
+	context.font = "40px Verdana";
+	context.fillText("Player 1  |  Player 2", canvas.width/3, 60);
+	context.fillText(player1Score, canvas.width * (3.1/8), 120);
+	context.fillText(player2Score, canvas.width * (5/8), 120);
+
 
 	if(ball.left() < player1.right() && ball.right() > player1.left() && ball.top() < player1.bottom() && ball.bottom() > player1.top() )
 	{
