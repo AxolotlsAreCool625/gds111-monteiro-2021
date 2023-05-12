@@ -12,7 +12,7 @@ function GameObject()
 	//Object's velocity or speed on each axis
 	this.vx = 0;
 	this.vy = 0;
-	this.ax = 1;
+	this.ax = 0;
 	
 	//Object's force
 	this.force = 1;

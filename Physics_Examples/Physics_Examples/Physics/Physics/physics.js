@@ -19,8 +19,7 @@ var gravity = 1;
 	
 	player = new GameObject();
 	player.force = 2;
-	player.vx = 30;
-	player.vy = -30;
+	
 	timer = setInterval(animate, interval);
 
 
@@ -33,7 +32,7 @@ function animate()
 	//showFriction();
 	//showGravity();
 	//showPixelLock();
-	showBounce();
+	//showBounce();
 	
 	player.drawRect();
 }
@@ -79,7 +78,14 @@ function showFriction()
 	{
 		player.vx += player.ax * -player.force;
 	}
-	
+	if(w)
+	{	
+		player.vy += player.ay * -player.force;
+	}
+	if(s)
+	{
+		player.vy += player.ay * player.force;
+	}
 	
 	//--------------Apply friction to the Velocity X-----------------------------------------
 	player.vx *= frictionX;
@@ -178,14 +184,12 @@ function showBounce()
 	//--------------------Check Collision------------------------------------------------------
 	if(player.y > canvas.height - player.height/2)
 	{
+		
 		//--------Bounce the Ball---------------------------------------------------------------
 		player.y = canvas.height - player.height/2;
 		//the decimal is how bouncy you want the object to be
 		//It should be a number between 0 and 2;
 		player.vy = -player.vy * .99;
-		//this will slowely stop bouncing
-		player.vy = -35;
-		//this will keep bouncing to the same level
 	}
 	
 	//-----------------------------------------------------------------------------------------
