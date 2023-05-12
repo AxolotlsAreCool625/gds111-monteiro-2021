@@ -112,12 +112,12 @@ function animate()
 		ball.y -= player.height;
 		ball.vy = -35;
 
-		if (ball.x < player.x - player.width/6) 
+		if (ball.x < player.x - player.width/3) 
 		{
 			ball.vx = -ball.force * 5;
 			console.log("Collision Far Left");
 		}
-		else if (ball.x < player.x - player.width/3) 
+		else if (ball.x < player.x - player.width/6) 
 		{
 			ball.vx = -ball.force;
 			console.log("Collision Left");
