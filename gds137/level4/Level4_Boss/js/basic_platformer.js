@@ -5,7 +5,6 @@ var context;
 var timer;
 var interval;
 var player;
-var fired = false;
 
 
 	canvas = document.getElementById("canvas");
@@ -107,7 +106,6 @@ function animate()
 
 	if(player.hitTestObject(cannon0))
 	{
-		if(fired == false) {
 			player.x = cannon0.x;
 			player.y = cannon0.y;
 
@@ -120,10 +118,8 @@ function animate()
 			if (a == true){
 				cannon0.direction = 2;
 			}
-		}
 
 		if (space == true) {
-			fired = true;
 			
 			if (cannon0.direction == 0){
 				player.y -= cannon0.height;
