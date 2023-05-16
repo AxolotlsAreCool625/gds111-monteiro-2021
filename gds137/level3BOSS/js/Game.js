@@ -50,10 +50,12 @@ function animate()
 
 	if (player.x < (player.width/2)) {
 		player.x = 0 + player.width/2;
+		player.vx = 0;
 	}
 
 	if (player.x > (canvas.width - player.width/2)) {
 		player.x = canvas.width - player.width/2;
+		player.vx = 0;
 	}
 
 	player.vx *= player.friction;
