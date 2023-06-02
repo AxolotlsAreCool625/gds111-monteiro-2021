@@ -212,7 +212,7 @@ states["win"] = function()
 	
 	player.x = startX;
 	player.y = startY;
-	
+
 	context.drawImage(image,0,0, canvas.width, canvas.height);
 	
 	setTimeout(changeStates, 2000, "message")
